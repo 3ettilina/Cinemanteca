@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Cinemanteca</string>
+
+    <string name="movie_dummy_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc maximus feugiat nunc eget congue. Fusce vel eros eu sem sagittis ultricies nec eget sapien. Sed ligula dolor, tincidunt eget commodo vitae, eleifend ac dui. Aenean sit amet nunc id lacus pulvinar finibus. Donec venenatis, elit vel vulputate ultricies, lorem magna maximus lectus, nec convallis eros libero ut ligula. Donec elementum ornare ante, id tempus quam pretium eleifend. Etiam fermentum felis ac quam elementum, ut auctor mauris pretium. Vivamus sed mollis massa. Fusce egestas orci nulla, eget facilisis ipsum maximus sit amet. Nullam vitae est molestie, accumsan purus vitae, gravida velit. Mauris convallis ipsum a sapien convallis rutrum. Sed nibh felis, bibendum nec leo vel, ornare tempus massa.</string>
+</resources>
