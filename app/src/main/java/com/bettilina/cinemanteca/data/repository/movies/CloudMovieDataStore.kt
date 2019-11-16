@@ -5,7 +5,17 @@ import com.bettilina.cinemanteca.data.model.Movie
 import com.bettilina.cinemanteca.data.service.MovieService
 
 class CloudMovieDataStore(private var movieService: MovieService): MovieDataStore {
+    override suspend fun addFavourite(movie: Movie): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
+    override suspend fun quitFavourite(ids: Int): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override suspend fun isFavourite(ids: Int): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     override suspend fun getMovies(apiKey: String): List<Movie> {
         return movieService.getMovies(apiKey).movieList

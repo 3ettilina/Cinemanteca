@@ -35,4 +35,17 @@ class DatabaseMovieDataStore (private val movieDao: MovieDao): MovieDataStore{
     override suspend fun getMoviesBySearch(apiKey: String, txtSearch: String): List<Movie> {
         return MovieResponse(listOf()).movieList
     }
+
+    override suspend fun addFavourite(movie: Movie): Boolean {
+        movieDao.insertFavMovie(movie)
+        return true
+    }
+
+    override suspend fun quitFavourite(ids: Int): Boolean {
+        return (movieDao.deleteFavMovie(ids)>0)
+    }
+
+    override suspend fun isFavourite(ids: Int): Boolean {
+        return movieDao.isFavMovie(ids)>0
+    }
 }

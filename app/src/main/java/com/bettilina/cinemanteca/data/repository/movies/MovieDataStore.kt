@@ -14,4 +14,10 @@ interface MovieDataStore {
     suspend fun getGenres(apiKey: String): List<Genre>
 
     suspend fun getMoviesBySearch(apiKey: String, txtSearch: String): List<Movie>
+
+    suspend fun addFavourite(movie:Movie):Boolean
+
+    suspend fun quitFavourite(ids:Int):Boolean
+
+    suspend fun isFavourite(ids:Int):Boolean
 }

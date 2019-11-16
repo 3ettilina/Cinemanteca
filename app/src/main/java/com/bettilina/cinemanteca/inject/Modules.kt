@@ -5,6 +5,7 @@ import com.bettilina.cinemanteca.data.dao.MovieDao
 import com.bettilina.cinemanteca.data.helper.NetworkingManager
 import com.bettilina.cinemanteca.data.repository.MovieSourceDataRepository
 import com.bettilina.cinemanteca.data.repository.MovieSourceRepository
+import com.bettilina.cinemanteca.data.repository.movies.DatabaseMovieDataStore
 import com.bettilina.cinemanteca.data.repository.movies.MovieDataStoreFactory
 import com.bettilina.cinemanteca.data.service.MovieService
 import com.bettilina.cinemanteca.data.source.AppDatabase
@@ -41,6 +42,7 @@ var databaseModule = module{
 var movieModule = module {
     single{ MovieDataStoreFactory(get(), get(), get())}
     single<MovieSourceRepository> { MovieSourceDataRepository(get()) }
+    single<DatabaseMovieDataStore> { DatabaseMovieDataStore(get()) }
 
     viewModel{ HomeViewModel(get()) }
     viewModel{ FavoritesViewModel(get()) }

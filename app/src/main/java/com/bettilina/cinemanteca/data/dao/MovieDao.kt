@@ -22,8 +22,10 @@ interface MovieDao {
     @Delete
     suspend fun deleteMovies(vararg movies: Movie)
 
-    @Delete
-    suspend fun deleteFavMovie(movie: Movie)
+    @Query("DELETE from Movies where id = :ids ")
+    suspend fun deleteFavMovie(ids:Int):Int
 
+    @Query("SELECT count(*) from Movies where id = :ids ")
+    suspend fun isFavMovie(ids:Int) : Int
 
 }

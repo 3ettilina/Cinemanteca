@@ -5,12 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.bettilina.cinemanteca.data.model.Movie
 import com.bettilina.cinemanteca.data.repository.MovieSourceRepository
+import com.bettilina.cinemanteca.data.repository.movies.DatabaseMovieDataStore
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
-class FavoritesViewModel(private val repository: MovieSourceRepository): ViewModel(), CoroutineScope {
+class FavoritesViewModel(private val repository: DatabaseMovieDataStore): ViewModel(), CoroutineScope {
 
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main
@@ -30,7 +31,7 @@ class FavoritesViewModel(private val repository: MovieSourceRepository): ViewMod
         localIsLoading.postValue(true)
         launch(Dispatchers.IO){
             try {
-                val movies = repository.getMovies()
+                val movies = repository.getMovies("")
                 localMovies.postValue(movies)
             } catch (exception: Exception){
 
