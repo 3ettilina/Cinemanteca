@@ -7,12 +7,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import com.bettilina.cinemanteca.R
 import com.bettilina.cinemanteca.utils.Constants
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.fragment_movie.*
 import org.threeten.bp.ZonedDateTime
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -47,8 +50,10 @@ class MovieFragment : Fragment(){
                 }
             }
 
-
-
+        val btn:Button = vw.findViewById(R.id.btn_Reviews)
+        btn.setOnClickListener{
+            Log.d("asdasd","asdasd")
+        }
 
         return vw
     }
@@ -66,6 +71,9 @@ class MovieFragment : Fragment(){
             .load(imageDir)
             .centerCrop()
             .into(view.findViewById<ImageView>(R.id.img_PosterMovie))
+
     }
 
+
 }
+

@@ -12,6 +12,7 @@ import com.bettilina.cinemanteca.data.source.AppDatabase
 import com.bettilina.cinemanteca.presentation.view.main.favorites.FavoritesViewModel
 import com.bettilina.cinemanteca.presentation.view.main.home.HomeViewModel
 import com.bettilina.cinemanteca.presentation.view.movie.MovieGenresViewModel
+import com.bettilina.cinemanteca.presentation.view.movie.ReviewsViewModel
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -47,4 +48,5 @@ var movieModule = module {
     viewModel{ HomeViewModel(get()) }
     viewModel{ FavoritesViewModel(get()) }
     viewModel{ MovieGenresViewModel(get()) }
+    viewModel{ ReviewsViewModel(get()) }
 }

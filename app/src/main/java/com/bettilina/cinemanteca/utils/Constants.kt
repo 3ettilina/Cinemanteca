@@ -7,4 +7,5 @@ object Constants {
     const val MOVIE_YEAR = "year"
     const val MOVIE_DESCRIPTION = "description"
     const val MOVIE_AVERAGE = "average"
+    const val MOVIE_ID = "average"
 }

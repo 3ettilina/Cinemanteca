@@ -3,8 +3,10 @@ package com.bettilina.cinemanteca.data.repository.movies
 import com.bettilina.cinemanteca.data.dao.MovieDao
 import com.bettilina.cinemanteca.data.model.Genre
 import com.bettilina.cinemanteca.data.model.Movie
+import com.bettilina.cinemanteca.data.model.Review
 import com.bettilina.cinemanteca.data.service.response.GenreResponse
 import com.bettilina.cinemanteca.data.service.response.MovieResponse
+import com.bettilina.cinemanteca.data.service.response.ReviewResponse
 
 class DatabaseMovieDataStore (private val movieDao: MovieDao): MovieDataStore{
 
@@ -47,5 +49,9 @@ class DatabaseMovieDataStore (private val movieDao: MovieDao): MovieDataStore{
 
     override suspend fun isFavourite(ids: Int): Boolean {
         return movieDao.isFavMovie(ids)>0
+    }
+
+    override suspend fun getMovieReviews(apiKey: String, id: Int): List<Review> {
+        return ReviewResponse(listOf()).reviewList
     }
 }

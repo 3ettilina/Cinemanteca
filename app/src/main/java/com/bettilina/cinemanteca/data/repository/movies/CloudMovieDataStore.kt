@@ -2,9 +2,11 @@ package com.bettilina.cinemanteca.data.repository.movies
 
 import com.bettilina.cinemanteca.data.model.Genre
 import com.bettilina.cinemanteca.data.model.Movie
+import com.bettilina.cinemanteca.data.model.Review
 import com.bettilina.cinemanteca.data.service.MovieService
 
 class CloudMovieDataStore(private var movieService: MovieService): MovieDataStore {
+
     override suspend fun addFavourite(movie: Movie): Boolean {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
@@ -35,5 +37,9 @@ class CloudMovieDataStore(private var movieService: MovieService): MovieDataStor
 
     override suspend fun getMoviesBySearch(apiKey: String, txtSearch: String): List<Movie> {
         return movieService.searchMovie(apiKey, txtSearch).movieList
+    }
+
+    override suspend fun getMovieReviews(apiKey: String, id: Int): List<Review> {
+        return  movieService.getReviews(apiKey,id).reviewList
     }
 }

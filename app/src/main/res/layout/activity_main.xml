@@ -20,6 +20,7 @@
         android:layout_alignParentBottom="true"
         app:labelVisibilityMode="selected"
         app:itemHorizontalTranslationEnabled="true"
+        android:background="@color/colorGray"
         app:menu="@menu/main_menu"
         />
 

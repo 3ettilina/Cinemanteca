@@ -2,6 +2,7 @@ package com.bettilina.cinemanteca.data.repository.movies
 
 import com.bettilina.cinemanteca.data.model.Genre
 import com.bettilina.cinemanteca.data.model.Movie
+import com.bettilina.cinemanteca.data.model.Review
 
 interface MovieDataStore {
 
@@ -20,4 +21,6 @@ interface MovieDataStore {
     suspend fun quitFavourite(ids:Int):Boolean
 
     suspend fun isFavourite(ids:Int):Boolean
+
+    suspend fun getMovieReviews(apiKey: String, id: Int):List<Review>
 }

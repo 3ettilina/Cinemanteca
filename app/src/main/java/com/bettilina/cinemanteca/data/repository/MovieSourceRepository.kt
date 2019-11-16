@@ -2,6 +2,7 @@ package com.bettilina.cinemanteca.data.repository
 
 import com.bettilina.cinemanteca.data.model.Genre
 import com.bettilina.cinemanteca.data.model.Movie
+import com.bettilina.cinemanteca.data.model.Review
 
 interface MovieSourceRepository {
 
@@ -14,4 +15,6 @@ interface MovieSourceRepository {
     suspend fun getMoviesGenres():List<Genre>
 
     suspend fun getMoviesBySearch(apiKey: String, txtSearch: String): List<Movie>
+
+    suspend fun getMovieReviews(apiKey: String, id: Int): List<Review>
 }
