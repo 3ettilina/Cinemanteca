@@ -54,10 +54,9 @@ class MovieAdapter(): RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
             itemView.txt_Rank.text = movie.voteAverage.toString()
             Glide
                 .with(itemView)
-                .load(App.imgSrcBasePath500 + movie.posterPath)
+                .load(App.imgSrcBasePath + movie.posterPath)
                 .centerCrop()
                 .into(itemView.findViewById(R.id.img_Movie))
-            //Log.d("aaaaaaaaaaaaaaaaaaa",movie.genders[1])
 
 
             itemView.setOnClickListener {vw->

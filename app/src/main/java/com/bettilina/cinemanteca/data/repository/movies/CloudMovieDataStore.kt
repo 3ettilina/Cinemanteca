@@ -6,6 +6,7 @@ import com.bettilina.cinemanteca.data.service.MovieService
 
 class CloudMovieDataStore(private var movieService: MovieService): MovieDataStore {
 
+
     override suspend fun getMovies(apiKey: String): List<Movie> {
         return movieService.getMovies(apiKey).movieList
     }
@@ -22,4 +23,7 @@ class CloudMovieDataStore(private var movieService: MovieService): MovieDataStor
         return movieService.getGenres(apiKey).genreList
     }
 
+    override suspend fun getMoviesBySearch(apiKey: String, txtSearch: String): List<Movie> {
+        return movieService.searchMovie(apiKey, txtSearch).movieList
+    }
 }

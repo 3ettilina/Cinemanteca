@@ -12,4 +12,6 @@ interface MovieDataStore {
     suspend fun getMoviewsByVoteAvg(apiKey: String, minVote: Int, maxVote: Int): List<Movie>
 
     suspend fun getGenres(apiKey: String): List<Genre>
+
+    suspend fun getMoviesBySearch(apiKey: String, txtSearch: String): List<Movie>
 }

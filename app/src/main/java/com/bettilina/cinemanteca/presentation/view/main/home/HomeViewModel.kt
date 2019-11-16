@@ -9,6 +9,7 @@ import com.bettilina.cinemanteca.App
 import com.bettilina.cinemanteca.data.model.Movie
 import com.bettilina.cinemanteca.data.repository.MovieSourceRepository
 import com.bettilina.cinemanteca.data.service.MovieService
+import com.bettilina.cinemanteca.utils.Constants
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -27,8 +28,16 @@ class HomeViewModel(private val repository: MovieSourceRepository): ViewModel(),
     val isLoading: LiveData<Boolean>
         get() = localIsLoading
 
+    val search: LiveData<List<Movie>>
+        get() = localSearch
+
+    val filter: LiveData<List<Movie>>
+        get() = localFilter
+
     private val localMovies = MutableLiveData<List<Movie>>()
     private val localIsLoading = MutableLiveData<Boolean>()
+    private val localSearch = MutableLiveData<List<Movie>>()
+    private val localFilter = MutableLiveData<List<Movie>>()
 
     fun loadMovies(){
         localIsLoading.postValue(true)
@@ -42,5 +51,36 @@ class HomeViewModel(private val repository: MovieSourceRepository): ViewModel(),
                 localIsLoading.postValue(false)
             }
         }
+    }
+
+    fun searchMovie(txtSearch:String){
+        localIsLoading.postValue(true)
+        launch(Dispatchers.IO){
+            try {
+                val moviesList = repository.getMoviesBySearch(App.apiKey,txtSearch)
+                localSearch.postValue(moviesList)
+            } catch (error: Exception){
+                Log.d("LOAD_MOVIES_EXCEPTION", "Exception when searching movies: " + error)
+            } finally {
+                localIsLoading.postValue(false)
+            }
+        }
+    }
+
+    fun setFilter(init:Int,end:Int,searching:Boolean){
+        localIsLoading.postValue(true)
+        if (searching){
+            movies.value?.let{
+                val filterList = it.filter { movie -> movie.voteAverage.toInt() in init..end }
+                localFilter.postValue(filterList)
+            }
+        }else{
+            search.value?.let{
+                val filterList = it.filter { movie -> movie.voteAverage.toInt() in init..end }
+                localFilter.postValue(filterList)
+            }
+        }
+        localIsLoading.postValue(false)
+
     }
 }

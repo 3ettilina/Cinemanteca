@@ -20,15 +20,19 @@
             android:id="@+id/txt_MovieSearch"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"/>
-
-        <Button
-            android:id="@+id/btn_MovieSearch"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SEARCH"/>
+            android:drawableRight="@drawable/ic_clear_black_24dp"
+            android:hint="Tap to Search"/>
 
     </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatRatingBar
+        android:id="@+id/ratingBar_Search"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        android:layout_gravity="center"
+        android:numStars="5"
+        android:stepSize="1.0"/>
 
     <TextView
         android:layout_width="match_parent"

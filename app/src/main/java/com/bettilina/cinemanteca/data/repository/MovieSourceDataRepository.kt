@@ -22,4 +22,8 @@ class MovieSourceDataRepository(var factory: MovieDataStoreFactory): MovieSource
     override suspend fun getMoviesGenres(): List<Genre> {
         return factory.movieDataStoreFactory.getGenres(App.apiKey)
     }
+
+    override suspend fun getMoviesBySearch(apiKey: String, txtSearch: String): List<Movie> {
+        return factory.movieDataStoreFactory.getMoviesBySearch(App.apiKey, txtSearch)
+    }
 }

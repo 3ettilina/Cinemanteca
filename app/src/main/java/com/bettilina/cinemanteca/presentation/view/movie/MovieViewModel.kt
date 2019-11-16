@@ -25,4 +25,9 @@ class MovieViewModel(): ViewModel(), CoroutineScope {
     fun loadMovie(){
         localIsLoading.postValue(true)
     }
+
+    fun searchMovie(search:String){
+
+    }
+
 }

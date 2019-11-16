@@ -48,7 +48,7 @@ class FavoritesFragment: Fragment() {
     }
 
     private fun loadingStateChanged(isLoading : Boolean){
-        pb_FavMoviesRV.visibleIf(isLoading)
+        loading_Favs.visibleIf(isLoading)
         rv_FavMovies.visibleIf(!isLoading)
     }
 

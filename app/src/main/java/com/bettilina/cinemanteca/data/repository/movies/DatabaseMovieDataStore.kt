@@ -3,6 +3,7 @@ package com.bettilina.cinemanteca.data.repository.movies
 import com.bettilina.cinemanteca.data.dao.MovieDao
 import com.bettilina.cinemanteca.data.model.Genre
 import com.bettilina.cinemanteca.data.model.Movie
+import com.bettilina.cinemanteca.data.service.response.GenreResponse
 import com.bettilina.cinemanteca.data.service.response.MovieResponse
 
 class DatabaseMovieDataStore (private val movieDao: MovieDao): MovieDataStore{
@@ -28,6 +29,10 @@ class DatabaseMovieDataStore (private val movieDao: MovieDao): MovieDataStore{
     }
 
     override suspend fun getGenres(apiKey: String): List<Genre> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return GenreResponse(listOf()).genreList
+    }
+
+    override suspend fun getMoviesBySearch(apiKey: String, txtSearch: String): List<Movie> {
+        return MovieResponse(listOf()).movieList
     }
 }
