@@ -8,6 +8,7 @@
     >
 
     <LinearLayout
+        android:id="@+id/containerMovie"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:background="@drawable/movie_border"
@@ -75,14 +76,27 @@
         </LinearLayout>
     </LinearLayout>
 
-    <TextView
-    android:id="@+id/btn_Favorites"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="FAVORITES"
-    android:background="@drawable/movie_button_border"
-    android:textStyle="bold"
-    android:textAlignment="center"
-    android:padding="5dp"/>
+    <LinearLayout
+        android:id="@+id/btn_Favorites"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="FAVORITES"
+            android:background="@drawable/movie_button_border"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:padding="5dp"
+            />
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/chk_Fav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            />
+    </LinearLayout>
+
 
 </LinearLayout>

@@ -2,6 +2,7 @@ package com.bettilina.cinemanteca.presentation.view.main.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -59,7 +60,7 @@ class MovieAdapter(): RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
                 .into(itemView.findViewById(R.id.img_Movie))
 
 
-            itemView.setOnClickListener {vw->
+            itemView.containerMovie.setOnClickListener {
                 context?.let {
                     val intent = Intent(context, MovieActivity::class.java).apply {
                         putExtra(Constants.MOVIE_TITLE, movie.title)
@@ -75,7 +76,18 @@ class MovieAdapter(): RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
                     ContextCompat.startActivity(it, intent, null)
                 }
             }
+            itemView.btn_Favorites.setOnClickListener{
+                /*Se debe agregar o quitar la pelicula a favoritos la pelicula a favoritos*/
+                context?.let{
+                    itemView.chk_Fav.isChecked=!itemView.chk_Fav.isChecked
+                    if(itemView.chk_Fav.isChecked){
+                        itemView.btn_Favorites.setBackgroundColor(Color.parseColor(it.getString(R.string.FavColor)))
+                    }else{
+                        itemView.btn_Favorites.setBackgroundColor(Color.parseColor(it.getString(R.string.NoFavColor)))
+                    }
+                }
 
+            }
         }
     }
 }
