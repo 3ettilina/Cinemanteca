@@ -1,5 +1,6 @@
 package com.bettilina.cinemanteca.data.repository
 
+import com.bettilina.cinemanteca.data.model.Genre
 import com.bettilina.cinemanteca.data.model.Movie
 
 interface MovieSourceRepository {
@@ -9,4 +10,6 @@ interface MovieSourceRepository {
     suspend fun getMoviesByPage(page: Int): List<Movie>
 
     suspend fun getMoviewsByVoteAvg(minVote: Int, maxVote: Int): List<Movie>
+
+    suspend fun getMoviesGenres():List<Genre>
 }

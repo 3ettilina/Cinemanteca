@@ -1,5 +1,6 @@
 package com.bettilina.cinemanteca.data.repository.movies
 
+import com.bettilina.cinemanteca.data.model.Genre
 import com.bettilina.cinemanteca.data.model.Movie
 import com.bettilina.cinemanteca.data.service.MovieService
 
@@ -15,6 +16,10 @@ class CloudMovieDataStore(private var movieService: MovieService): MovieDataStor
 
     override suspend fun getMoviewsByVoteAvg(apiKey: String, minVote: Int, maxVote: Int): List<Movie> {
         return movieService.getMoviesByVoteAvg(apiKey, minVote, maxVote).movieList
+    }
+
+    override suspend fun getGenres(apiKey: String): List<Genre> {
+        return movieService.getGenres(apiKey).genreList
     }
 
 }

@@ -25,4 +25,5 @@ interface MovieDao {
     @Delete
     suspend fun deleteFavMovie(movie: Movie)
 
+
 }

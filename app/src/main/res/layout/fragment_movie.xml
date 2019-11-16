@@ -13,8 +13,9 @@
         android:layout_marginBottom="20dp">
 
         <ImageView
-            android:layout_width="150dp"
-            android:layout_height="300dp"
+            android:id="@+id/img_PosterMovie"
+            android:layout_width="200dp"
+            android:layout_height="320dp"
             android:background="@drawable/movie_border"/>
 
         <LinearLayout
@@ -25,30 +26,34 @@
             android:layout_marginStart="15dp">
 
             <TextView
+                android:id="@+id/txt_TitleMovie"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Title"
                 android:textStyle="bold"
                 android:textSize="17sp"
-                android:textAlignment="center"/>
+                android:textAlignment="textStart"/>
 
             <TextView
+                android:id="@+id/txt_RankMovie"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="7.5pt"
                 android:textStyle="bold"/>
 
             <TextView
+                android:id="@+id/txt_GenreMovie"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Comedy"
                 android:textStyle="bold"/>
 
             <TextView
+                android:id="@+id/txt_YearMovie"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2018"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
         </LinearLayout>
     </LinearLayout>
@@ -62,6 +67,7 @@
         android:textAlignment="center"/>
 
     <TextView
+        android:id="@+id/txt_DescriptionMovie"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/movie_dummy_description"/>

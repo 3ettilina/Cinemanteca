@@ -47,7 +47,11 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView_Movies"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            app:spanCount="2"
+            android:verticalSpacing="5dp"
+            android:horizontalSpacing="5dp"
+            />
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/loading_Movies"

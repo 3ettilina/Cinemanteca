@@ -2,74 +2,80 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="200dp"
-    android:layout_height="wrap_content"
-    android:layout_margin="20dp">
-
-<LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="270dp"
-    android:orientation="vertical"
-    android:background="@drawable/movie_border"
-    android:padding="15dp">
-
-    <ImageView
-        android:layout_width="170dp"
-        android:layout_height="0dp"
-        android:layout_weight="7"
-        android:background="@android:color/holo_blue_light"
-        android:contentDescription="Movie poster"
-        android:layout_marginBottom="10dp"/>
-
-    <TextView
-        android:id="@+id/txt_Title"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:textSize="16sp"
-        android:text="Title"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
-        android:textStyle="bold"/>
+    android:layout_height="wrap_content"
+    android:padding="4dp"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        android:paddingStart="5dp"
-        android:paddingEnd="5dp">
+        android:layout_height="250dp"
+        android:background="@drawable/movie_border"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+
+        <ImageView
+            android:id="@+id/img_Movie"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="7"
+            android:background="@android:color/holo_blue_light"
+            android:contentDescription="Movie poster" />
+
 
         <TextView
-            android:id="@+id/txt_Genre"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:id="@+id/txt_Title"
+            android:layout_width="match_parent"
+            android:layout_height="9dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="5dp"
             android:layout_weight="2"
-            android:text="Comedy"
-            android:textAlignment="viewStart"
-            android:textStyle="bold"/>
+            android:text="Title"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/txt_Year"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="2018"
-            android:textAlignment="viewStart"
-            android:textStyle="bold"/>
+            android:orientation="horizontal"
+            android:paddingStart="3dp"
+            android:paddingEnd="1dp">
 
-        <TextView
-            android:id="@+id/txt_Rank"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="7.5"
-            android:textAlignment="viewEnd"
-            android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/txt_Genre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="Comedy"
+                android:textAlignment="viewStart"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txt_Year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="2018"
+                android:textAlignment="viewStart"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txt_Rank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="7.5"
+                android:textAlignment="viewEnd"
+                android:textStyle="bold" />
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
 
-<TextView
+    <TextView
     android:id="@+id/btn_Favorites"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
