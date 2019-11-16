@@ -17,8 +17,8 @@ import org.koin.android.ext.android.inject
 
 class FavoritesFragment: Fragment() {
 
-    private val adapter = MovieAdapter()
     private val viewModel: FavoritesViewModel by inject()
+    private val adapter = MovieAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,

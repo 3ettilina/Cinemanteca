@@ -18,6 +18,6 @@ data class Movie(
     val voteCount: Int,
     val backdropPath: String,
     @SerializedName("original_language")
-        val language: String
-
+        val language: String,
+    val isFavorite: Int = 0
 )

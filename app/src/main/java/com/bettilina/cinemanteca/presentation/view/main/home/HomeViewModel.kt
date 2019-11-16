@@ -6,8 +6,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.bettilina.cinemanteca.App
+import com.bettilina.cinemanteca.data.dao.MovieDao
 import com.bettilina.cinemanteca.data.model.Movie
 import com.bettilina.cinemanteca.data.repository.MovieSourceRepository
+import com.bettilina.cinemanteca.data.repository.movies.DatabaseMovieDataStore
 import com.bettilina.cinemanteca.data.service.MovieService
 import com.bettilina.cinemanteca.utils.Constants
 import kotlinx.coroutines.CoroutineScope
@@ -17,7 +19,8 @@ import kotlinx.coroutines.launch
 import java.lang.Exception
 import kotlin.coroutines.CoroutineContext
 
-class HomeViewModel(private val repository: MovieSourceRepository): ViewModel(), CoroutineScope {
+class HomeViewModel(private val repository: MovieSourceRepository,
+                    private val dbDataStore: DatabaseMovieDataStore): ViewModel(), CoroutineScope {
     //Current thread
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main
@@ -40,6 +43,26 @@ class HomeViewModel(private val repository: MovieSourceRepository): ViewModel(),
         }
     }
 
+    fun addFavoriteMovie(movieId: Int){
+        launch(Dispatchers.IO){
+            try {
+                dbDataStore.addFavorite(movieId)
+            } catch (error: Exception){
+                Log.d("ADD_FAVS_EXC", "Exception when adding movie to favorites: " + error)
+            }
+        }
+    }
+
+    fun removeFavoriteMovie(movieID: Int){
+        launch(Dispatchers.IO){
+            try {
+                dbDataStore.removeFavorite(movieID)
+            } catch (error: Exception){
+                Log.d("REMOVE_FAV_EXC", "Exception when removing movie from favorites: " + error)
+            }
+        }
+    }
+
     private fun loadRecomendedMovies(ratingFilter:Float){
         localIsLoading.postValue(true)
         launch(Dispatchers.IO){
@@ -48,6 +71,7 @@ class HomeViewModel(private val repository: MovieSourceRepository): ViewModel(),
                 if(ratingFilter.toInt()==0) {
                     localMovies.postValue(moviesList)
                 }else{
+                    //TODO: Change filter for api usage
                     val init:Int = (ratingFilter.toInt()*2) -2
                     val end:Int = (ratingFilter.toInt()*2)
                     val filterList = moviesList.filter { movie -> movie.voteAverage.toInt() in init..end }
@@ -61,17 +85,17 @@ class HomeViewModel(private val repository: MovieSourceRepository): ViewModel(),
         }
     }
 
-    private fun searchMovie(ratingFilter:Float,txtSearch:String){
-
+    private fun searchMovie(ratingFilter: Float, txtSearch: String){
         localIsLoading.postValue(true)
         launch(Dispatchers.IO){
             try {
                 val moviesList = repository.getMoviesBySearch(App.apiKey,txtSearch)
-                if(ratingFilter.toInt()==0) {
+                if(ratingFilter.toInt() == 0) {
                     localMovies.postValue(moviesList)
                 }else{
-                    val init:Int = (ratingFilter.toInt()*2) -2
-                    val end:Int = (ratingFilter.toInt()*2)
+                    //TODO: Call endpoint instead of filtering the list
+                    val init:Int = (ratingFilter.toInt() *2 ) -2
+                    val end:Int = (ratingFilter.toInt() *2 )
                     val filterList = moviesList.filter { movie -> movie.voteAverage.toInt() in init..end }
                     localMovies.postValue(filterList)
                 }
@@ -82,6 +106,4 @@ class HomeViewModel(private val repository: MovieSourceRepository): ViewModel(),
             }
         }
     }
-
-
 }

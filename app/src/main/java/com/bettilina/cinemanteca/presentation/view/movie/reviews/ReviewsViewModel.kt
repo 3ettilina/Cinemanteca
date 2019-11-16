@@ -1,4 +1,4 @@
-package com.bettilina.cinemanteca.presentation.view.movie
+package com.bettilina.cinemanteca.presentation.view.movie.reviews
 
 import android.util.Log
 import androidx.lifecycle.LiveData

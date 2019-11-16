@@ -4,13 +4,9 @@ import android.content.Context
 import android.os.Bundle
 import android.util.AttributeSet
 import android.view.View
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import com.bettilina.cinemanteca.App
 import com.bettilina.cinemanteca.R
-import com.bettilina.cinemanteca.utils.Constants
-import kotlinx.android.synthetic.main.fragment_movie.*
+import com.bettilina.cinemanteca.presentation.view.movie.movie.MovieFragment
 
 class MovieActivity: AppCompatActivity() {
 
@@ -22,7 +18,8 @@ class MovieActivity: AppCompatActivity() {
 
         supportFragmentManager
             .beginTransaction()
-            .add(R.id.containerMovie, MovieFragment(), MovieFragmentTag)
+            .add(R.id.containerMovie,
+                MovieFragment(), MovieFragmentTag)
             .commit()
     }
 

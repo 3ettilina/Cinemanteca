@@ -22,7 +22,7 @@ class DatabaseMovieDataStore (private val movieDao: MovieDao): MovieDataStore{
 
     //TODO: check how to create the query on the MovieDao class to return
     // movies by VoteAvg
-    override suspend fun getMoviewsByVoteAvg(
+    override suspend fun getMoviesByVoteAvg(
         apiKey: String,
         minVote: Int,
         maxVote: Int
@@ -38,20 +38,20 @@ class DatabaseMovieDataStore (private val movieDao: MovieDao): MovieDataStore{
         return MovieResponse(listOf()).movieList
     }
 
-    override suspend fun addFavourite(movie: Movie): Boolean {
-        movieDao.insertFavMovie(movie)
+    override suspend fun getMovieReviews(apiKey: String, id: Int): List<Review> {
+        return ReviewResponse(listOf()).reviewList
+    }
+
+    suspend fun getFavoriteMovies(): List<Movie>{
+        return movieDao.getFavoriteMovies()
+    }
+
+    suspend fun addFavorite(movieId: Int): Boolean {
+        movieDao.addFavoriteMovie(movieId)
         return true
     }
 
-    override suspend fun quitFavourite(ids: Int): Boolean {
-        return (movieDao.deleteFavMovie(ids)>0)
-    }
-
-    override suspend fun isFavourite(ids: Int): Boolean {
-        return movieDao.isFavMovie(ids)>0
-    }
-
-    override suspend fun getMovieReviews(apiKey: String, id: Int): List<Review> {
-        return ReviewResponse(listOf()).reviewList
+    suspend fun removeFavorite(ids: Int): Boolean {
+        return (movieDao.removeFavMovie(ids)>0)
     }
 }

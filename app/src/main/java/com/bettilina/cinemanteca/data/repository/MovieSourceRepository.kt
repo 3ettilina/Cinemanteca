@@ -10,7 +10,7 @@ interface MovieSourceRepository {
 
     suspend fun getMoviesByPage(page: Int): List<Movie>
 
-    suspend fun getMoviewsByVoteAvg(minVote: Int, maxVote: Int): List<Movie>
+    suspend fun getMoviesByVoteAvg(minVote: Int, maxVote: Int): List<Movie>
 
     suspend fun getMoviesGenres():List<Genre>
 

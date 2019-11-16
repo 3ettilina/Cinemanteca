@@ -7,18 +7,6 @@ import com.bettilina.cinemanteca.data.service.MovieService
 
 class CloudMovieDataStore(private var movieService: MovieService): MovieDataStore {
 
-    override suspend fun addFavourite(movie: Movie): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override suspend fun quitFavourite(ids: Int): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override suspend fun isFavourite(ids: Int): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
     override suspend fun getMovies(apiKey: String): List<Movie> {
         return movieService.getMovies(apiKey).movieList
     }
@@ -27,7 +15,7 @@ class CloudMovieDataStore(private var movieService: MovieService): MovieDataStor
         return movieService.getMoviesByPage(apiKey, pageNumber).movieList
     }
 
-    override suspend fun getMoviewsByVoteAvg(apiKey: String, minVote: Int, maxVote: Int): List<Movie> {
+    override suspend fun getMoviesByVoteAvg(apiKey: String, minVote: Int, maxVote: Int): List<Movie> {
         return movieService.getMoviesByVoteAvg(apiKey, minVote, maxVote).movieList
     }
 

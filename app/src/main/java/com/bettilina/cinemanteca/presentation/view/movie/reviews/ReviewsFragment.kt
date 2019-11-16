@@ -1,4 +1,4 @@
-package com.bettilina.cinemanteca.presentation.view.movie
+package com.bettilina.cinemanteca.presentation.view.movie.reviews
 
 import android.os.Bundle
 import android.util.Log
@@ -22,7 +22,8 @@ class ReviewsFragment : Fragment() {
     private var movirId:Int =0
 
     companion object {
-        fun newInstance() = ReviewsFragment()
+        fun newInstance() =
+            ReviewsFragment()
     }
 
     override fun onCreateView(
@@ -50,21 +51,7 @@ class ReviewsFragment : Fragment() {
         //Observe changes of data/flags on the viewModel
         viewModel.reviews.observe(viewLifecycleOwner, Observer(this::reviewsLoaded))
         viewModel.loadReviewsMovies(0)
-
-        //TODO Por algun motivo esta funcion no funciona
-        view.findViewById<Button>(R.id.btn_Reviews).setOnClickListener{
-            Log.d("SETCLICK","SETCLICK")
-            fragmentManager?.let{
-                val transaction = it.beginTransaction().apply {
-                    replace(R.id.containerMovie, ReviewsFragment())
-                    addToBackStack(null)
-                }
-
-                // Commit the transaction
-                transaction.commit()
-            }
-
-        }
+        
     }
 
     private fun reviewsLoaded(reviews:List<Review>){

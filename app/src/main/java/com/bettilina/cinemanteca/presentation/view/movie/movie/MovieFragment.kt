@@ -1,8 +1,6 @@
-package com.bettilina.cinemanteca.presentation.view.movie
+package com.bettilina.cinemanteca.presentation.view.movie.movie
 
 import android.os.Bundle
-import android.provider.SyncStateContract
-import android.text.format.DateFormat
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,15 +9,12 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.FragmentManager
 import com.bettilina.cinemanteca.R
+import com.bettilina.cinemanteca.presentation.view.movie.reviews.ReviewsFragment
 import com.bettilina.cinemanteca.utils.Constants
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_movie.*
-import org.threeten.bp.ZonedDateTime
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
-import java.util.*
 
 class MovieFragment : Fragment(){
 
@@ -28,14 +23,14 @@ class MovieFragment : Fragment(){
     private var genre: String? = ""
     private var imageDir: String? = ""
     private var year: String? = ""
-    private var descriprion: String? = ""
+    private var description: String? = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val vw:View =inflater.inflate(R.layout.fragment_movie, container, false)
+        val view = inflater.inflate(R.layout.fragment_movie, container, false)
 
             /*Obteniendo valores de la película a través del intent*/
             activity?.let{
@@ -46,34 +41,32 @@ class MovieFragment : Fragment(){
                     genre = bundle.getString(Constants.MOVIE_GENRE,"")
                     imageDir = bundle.getString(Constants.MOVIE_IMAGE_DIR,"")
                     year = bundle.getString(Constants.MOVIE_YEAR,"")
-                    descriprion = bundle.getString(Constants.MOVIE_DESCRIPTION,"")
+                    description = bundle.getString(Constants.MOVIE_DESCRIPTION,"")
                 }
             }
-
-        val btn:Button = vw.findViewById(R.id.btn_Reviews)
-        btn.setOnClickListener{
-            Log.d("asdasd","asdasd")
-        }
-
-        return vw
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.findViewById<TextView>(R.id.txt_TitleMovie).text = title
-        view.findViewById<TextView>(R.id.txt_GenreMovie).text = genre
-        view.findViewById<TextView>(R.id.txt_RankMovie).text = average
-        view.findViewById<TextView>(R.id.txt_YearMovie).text = year
-        view.findViewById<TextView>(R.id.txt_DescriptionMovie).text = descriprion
+        txt_TitleMovie.text = title
+        txt_GenreMovie.text = genre
+        txt_RankMovie.text = average
+        txt_YearMovie.text = year
+        txt_DescriptionMovie.text = description
 
         Glide
             .with(view)
             .load(imageDir)
             .centerCrop()
-            .into(view.findViewById<ImageView>(R.id.img_PosterMovie))
+            .into(view.findViewById(R.id.img_PosterMovie))
 
+        btn_Reviews.setOnClickListener{
+            fragmentManager!!
+                .beginTransaction()
+                .replace(R.id.containerMovie, ReviewsFragment.newInstance())
+                .commit()
+        }
     }
-
-
 }
 
