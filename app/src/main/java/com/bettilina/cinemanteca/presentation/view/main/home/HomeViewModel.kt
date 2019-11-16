@@ -28,23 +28,31 @@ class HomeViewModel(private val repository: MovieSourceRepository): ViewModel(),
     val isLoading: LiveData<Boolean>
         get() = localIsLoading
 
-    val search: LiveData<List<Movie>>
-        get() = localSearch
-
-    val filter: LiveData<List<Movie>>
-        get() = localFilter
-
     private val localMovies = MutableLiveData<List<Movie>>()
     private val localIsLoading = MutableLiveData<Boolean>()
-    private val localSearch = MutableLiveData<List<Movie>>()
-    private val localFilter = MutableLiveData<List<Movie>>()
 
-    fun loadMovies(){
+
+    fun loadMovies(ratingFilter:Float,txtSearch:String){
+        if(txtSearch.isEmpty()){
+            loadRecomendedMovies(ratingFilter)
+        }else {
+            searchMovie(ratingFilter,txtSearch)
+        }
+    }
+
+    private fun loadRecomendedMovies(ratingFilter:Float){
         localIsLoading.postValue(true)
         launch(Dispatchers.IO){
             try {
                 val moviesList = repository.getMovies()
-                localMovies.postValue(moviesList)
+                if(ratingFilter.toInt()==0) {
+                    localMovies.postValue(moviesList)
+                }else{
+                    val init:Int = (ratingFilter.toInt()*2) -2
+                    val end:Int = (ratingFilter.toInt()*2)
+                    val filterList = moviesList.filter { movie -> movie.voteAverage.toInt() in init..end }
+                    localMovies.postValue(filterList)
+                }
             } catch (error: Exception){
                 Log.d("LOAD_MOVIES_EXCEPTION", "Exception when loading movies: " + error)
             } finally {
@@ -53,12 +61,20 @@ class HomeViewModel(private val repository: MovieSourceRepository): ViewModel(),
         }
     }
 
-    fun searchMovie(txtSearch:String){
+    private fun searchMovie(ratingFilter:Float,txtSearch:String){
+
         localIsLoading.postValue(true)
         launch(Dispatchers.IO){
             try {
                 val moviesList = repository.getMoviesBySearch(App.apiKey,txtSearch)
-                localSearch.postValue(moviesList)
+                if(ratingFilter.toInt()==0) {
+                    localMovies.postValue(moviesList)
+                }else{
+                    val init:Int = (ratingFilter.toInt()*2) -2
+                    val end:Int = (ratingFilter.toInt()*2)
+                    val filterList = moviesList.filter { movie -> movie.voteAverage.toInt() in init..end }
+                    localMovies.postValue(filterList)
+                }
             } catch (error: Exception){
                 Log.d("LOAD_MOVIES_EXCEPTION", "Exception when searching movies: " + error)
             } finally {
@@ -67,20 +83,5 @@ class HomeViewModel(private val repository: MovieSourceRepository): ViewModel(),
         }
     }
 
-    fun setFilter(init:Int,end:Int,searching:Boolean){
-        localIsLoading.postValue(true)
-        if (searching){
-            movies.value?.let{
-                val filterList = it.filter { movie -> movie.voteAverage.toInt() in init..end }
-                localFilter.postValue(filterList)
-            }
-        }else{
-            search.value?.let{
-                val filterList = it.filter { movie -> movie.voteAverage.toInt() in init..end }
-                localFilter.postValue(filterList)
-            }
-        }
-        localIsLoading.postValue(false)
 
-    }
 }

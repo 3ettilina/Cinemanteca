@@ -47,54 +47,32 @@ class HomeFragment : Fragment() {
         //Observe changes of data/flags on the viewModel
         viewModel.movies.observe(viewLifecycleOwner, Observer(this::moviesLoaded))
         viewModel.isLoading.observe(viewLifecycleOwner, Observer(this::loadingStateChange))
-        viewModel.search.observe(viewLifecycleOwner, Observer(this::searchLoading))
-        viewModel.filter.observe(viewLifecycleOwner, Observer(this::setFilter))
-
         genreViewModel.genres.observe(viewLifecycleOwner, Observer(this::genresLoaded))
 
         //Call viewModel methods
-        viewModel.loadMovies()
+        viewModel.loadMovies(ratingBar_Search.rating,txt_MovieSearch.text.toString())
         genreViewModel.loadGenres()
 
         adapter.context = context
 
         txt_MovieSearch.addTextChangedListener(object : TextWatcher{
             override fun afterTextChanged(s: Editable) {}
-
-            override fun beforeTextChanged(s: CharSequence, start: Int,
-                                           count: Int, after: Int) {
-            }
-
+            override fun beforeTextChanged(s: CharSequence, start: Int,count: Int, after: Int) { }
             override fun onTextChanged(s: CharSequence, start: Int,before: Int, count: Int) {
-                if (s.isNotEmpty()) viewModel.searchMovie(s.toString()) else viewModel.loadMovies()
+                viewModel.loadMovies(ratingBar_Search.rating,s.toString())
             }
         })
-
+        /*Clear search*/
         txt_MovieSearch.onRightDrawableClicked {
             it.text.clear()
         }
 
         ratingBar_Search.setOnRatingBarChangeListener{_,rating,_ ->
-
-            if(rating.toInt()>0){
-                val init:Int = (rating.toInt() * 2) - 2
-                val end:Int = (rating.toInt() * 2)
-                viewModel.setFilter(init,end,txt_MovieSearch.text.isNotEmpty())
-            }else{
-                if (txt_MovieSearch.text.isNotEmpty()) viewModel.searchMovie(txt_MovieSearch.text.toString()) else viewModel.loadMovies()
-            }
+            viewModel.loadMovies(rating,txt_MovieSearch.text.toString())
         }
     }
 
     private fun moviesLoaded(movies: List<Movie>){
-        adapter.movies = movies
-    }
-
-    private fun searchLoading(movies: List<Movie>){
-        adapter.movies = movies
-    }
-
-    private fun setFilter(movies: List<Movie>){
         adapter.movies = movies
     }
 
