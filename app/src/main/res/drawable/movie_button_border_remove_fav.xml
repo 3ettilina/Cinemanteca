@@ -1,7 +1,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
-    <solid android:color="@color/movieBackgroundColor" />
+    <solid android:color="@color/noFavColor" />
     <stroke
         android:width="1dp"
-        android:color="@color/movieBorderColor" />
+        android:color="@color/movieBorderColor"/>
 </shape>

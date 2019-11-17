@@ -1,16 +1,49 @@
-<?xml version="1.0" encoding="utf-8"?><!-- Modify this file to customize your launch splash screen -->
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_width="match_parent">
-    <item>
-        <shape>
-            <solid android:color="#F10606" />
-        </shape>
-    </item>
-    <!-- You can insert your own image assets here -->
-    <item>
-        <bitmap
-            android:gravity="center"
-            android:src="@drawable/ic_pop_corn" />
-    </item>
-</layer-list>
+    android:orientation="vertical"
+    android:background="#3f51b5"
+    android:theme="@android:style/Theme.Material.Light.Dialog.NoActionBar">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="0dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txt_AppNameSplashScreen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"/>
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/splashScreenAnimation"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="splash_screen.json"
+            app:lottie_loop="true" />
+
+        <TextView
+            android:id="@+id/txt_SplashScreen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="100dp"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.view.movie.MovieActivity"
-    android:background="@color/colorLigthGray"
+    android:background="@color/appBackgroudColor"
     >
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,7 +40,8 @@
                     android:text="Title"
                     android:textStyle="bold"
                     android:textSize="17sp"
-                    android:textAlignment="textStart"/>
+                    android:textAlignment="textStart"
+                    android:layout_marginBottom="10dp"/>
 
                 <TextView
                     android:id="@+id/txt_RankMovie"
@@ -50,29 +51,39 @@
                     android:textStyle="bold"/>
 
                 <TextView
-                    android:id="@+id/txt_GenreMovie"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Comedy"
-                    android:textStyle="bold"/>
-
-                <TextView
                     android:id="@+id/txt_YearMovie"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="2018"
                     android:textStyle="bold" />
 
-                <ToggleButton
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    />
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp">
+
+                    <Button
+                        android:id="@+id/btn_Favorites"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="FAVS" />
+
+                    <androidx.appcompat.widget.AppCompatCheckBox
+                        android:id="@+id/chk_Fav"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        />
+
+                </LinearLayout>
 
                 <Button
                     android:id="@+id/btn_Reviews"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Reviews" />
+
             </LinearLayout>
         </LinearLayout>
 

@@ -2,24 +2,46 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:background="@color/colorGray"
-    android:layout_marginEnd="5dp"
-    android:padding="5dp">
+    android:layout_margin="5dp">
 
-    <TextView
-        android:id="@+id/txt_UserName"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="2"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:text="@string/sorry_not_reviews_yet"/>
+        android:orientation="vertical"
+        android:layout_margin="10dp">
 
-    <TextView
-        android:id="@+id/txt_ReviewText"
-        android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/img_ReviewPic"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:padding="5dp"
+            android:src="@drawable/ic_pic_review_boy_1"
+            android:background="@drawable/review_pic_border"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="7"
         android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
-        android:text=""
-        />
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txt_UserName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="18dp"/>
+
+        <TextView
+            android:id="@+id/txt_ReviewText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"/>
+    </LinearLayout>
 
 </LinearLayout>

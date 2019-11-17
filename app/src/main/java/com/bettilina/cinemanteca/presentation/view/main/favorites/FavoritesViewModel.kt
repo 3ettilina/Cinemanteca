@@ -1,5 +1,6 @@
 package com.bettilina.cinemanteca.presentation.view.main.favorites
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,12 +12,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
-class FavoritesViewModel(private val repository: DatabaseMovieDataStore): ViewModel(), CoroutineScope {
+class FavoritesViewModel(private val dbDataStore: DatabaseMovieDataStore): ViewModel(), CoroutineScope {
 
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main
 
-    //Declarate LiveData attributes
+    //Declare LiveData attributes
     val movies: LiveData<List<Movie>>
         get() = localMovies
 
@@ -31,12 +32,33 @@ class FavoritesViewModel(private val repository: DatabaseMovieDataStore): ViewMo
         localIsLoading.postValue(true)
         launch(Dispatchers.IO){
             try {
-                val movies = repository.getMovies("")
+                val movies = dbDataStore.getFavoriteMovies()
                 localMovies.postValue(movies)
             } catch (exception: Exception){
 
             } finally {
                 localIsLoading.postValue(false)
+            }
+        }
+    }
+
+    fun addFavoriteMovie(movieId: Int){
+        launch(Dispatchers.IO){
+            try {
+                dbDataStore.addFavorite(movieId)
+            } catch (error: java.lang.Exception){
+                Log.d("ADD_FAVS_EXC", "Exception when adding movie to favorites: " + error)
+            }
+        }
+    }
+
+    fun removeFavoriteMovie(movieID: Int){
+        launch(Dispatchers.IO){
+            try {
+                dbDataStore.removeFavorite(movieID)
+                loadFavMovies()
+            } catch (error: java.lang.Exception){
+                Log.d("REMOVE_FAV_EXC", "Exception when removing movie from favorites: " + error)
             }
         }
     }

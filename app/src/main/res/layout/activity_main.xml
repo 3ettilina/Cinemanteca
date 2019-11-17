@@ -5,14 +5,12 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/colorLigthGray"
-    >
+    android:background="@color/colorLightGray">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme"
-        >
+        android:theme="@style/AppTheme">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/my_toolbar"
@@ -26,20 +24,19 @@
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/bottomNav"
-        />
+        android:layout_height="match_parent"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         app:labelVisibilityMode="selected"
         app:itemHorizontalTranslationEnabled="true"
-        android:background="@color/colorGray"
+        android:background="@color/colorBottomNavigation"
         app:menu="@menu/main_menu"
         android:layout_gravity="bottom"
         />
+
     <include layout="@layout/fragment_bottom_sheet"/>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

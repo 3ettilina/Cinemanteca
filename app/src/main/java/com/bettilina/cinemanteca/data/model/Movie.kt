@@ -19,5 +19,5 @@ data class Movie(
     val backdropPath: String,
     @SerializedName("original_language")
         val language: String,
-    val isFavorite: Int = 0
+    var isFavorite: Int = 0
 )

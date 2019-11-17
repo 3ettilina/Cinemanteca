@@ -1,5 +1,6 @@
 package com.bettilina.cinemanteca.data.repository.movies
 
+import com.bettilina.cinemanteca.App
 import com.bettilina.cinemanteca.data.dao.MovieDao
 import com.bettilina.cinemanteca.data.helper.NetworkingManager
 import com.bettilina.cinemanteca.data.service.MovieService
@@ -19,7 +20,7 @@ open class MovieDataStoreFactory(
 
     private fun createDataSourceFactory() =
         if(networkingManager.isNetworkOnline())
-            CloudMovieDataStore(service)
+            CloudMovieDataStore(service, App.apiKey)
         else
             DatabaseMovieDataStore(movieDao)
 }

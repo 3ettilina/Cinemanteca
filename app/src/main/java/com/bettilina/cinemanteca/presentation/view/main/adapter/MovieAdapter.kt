@@ -1,40 +1,21 @@
 package com.bettilina.cinemanteca.presentation.view.main.adapter
 
 import android.content.Context
-import android.content.Intent
-import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModel
 import com.bettilina.cinemanteca.App
 import com.bettilina.cinemanteca.R
-import com.bettilina.cinemanteca.data.model.Genre
 import com.bettilina.cinemanteca.data.model.Movie
-import com.bettilina.cinemanteca.data.repository.movies.DatabaseMovieDataStore
-import com.bettilina.cinemanteca.presentation.view.main.home.HomeViewModel
-import com.bettilina.cinemanteca.presentation.view.movie.MovieActivity
-import com.bettilina.cinemanteca.utils.Constants
-import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
 import kotlinx.android.synthetic.main.view_movie.view.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import java.lang.Exception
 
-class MovieAdapter: RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+class MovieAdapter(private val glide: RequestManager): RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     var movies = listOf<Movie>()
         set(value) {
             field = value.sortedByDescending { it.popularity }
-            notifyDataSetChanged()
-        }
-
-    var genres = listOf<Genre>()
-        set(value) {
-            field = value.sortedByDescending { it.title }
             notifyDataSetChanged()
         }
 
@@ -56,13 +37,13 @@ class MovieAdapter: RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
     inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         //Assigns attributes of the movie to the itemView, to update the view contents.
         fun bind(movie: Movie) {
-
             itemView.txt_Title.text = movie.title
             itemView.txt_Year.text = movie.releaseDate
             itemView.txt_Rank.text = movie.voteAverage.toString()
-            Glide
-                .with(itemView)
+
+            glide
                 .load(App.imgSrcBasePath + movie.posterPath)
+                .override(200, 350)
                 .fitCenter()
                 .into(itemView.findViewById(R.id.img_Movie))
 

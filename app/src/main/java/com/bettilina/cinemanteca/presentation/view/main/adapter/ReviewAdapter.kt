@@ -6,15 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bettilina.cinemanteca.App
 import com.bettilina.cinemanteca.R
 import com.bettilina.cinemanteca.data.model.Review
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.view_reviews.view.*
 
 class ReviewAdapter: RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder>() {
     var reviews = listOf<Review>()
-       /* set(value) {
-            notifyDataSetChanged()
-        }*/
+       set(value) {
+           notifyDataSetChanged()
+           field = value
+       }
 
     var context: Context? = null
 

@@ -1,6 +1,5 @@
 package com.bettilina.cinemanteca.data.service
 
-import com.bettilina.cinemanteca.data.service.response.GenreResponse
 import com.bettilina.cinemanteca.data.service.response.MovieResponse
 import com.bettilina.cinemanteca.data.service.response.ReviewResponse
 import retrofit2.http.GET
@@ -25,9 +24,6 @@ interface MovieService {
                                    @Query("vote_average.gte") voteAverageGte: Int,
                                    @Query("vote_average.lte") voteAverageLte: Int): MovieResponse
 
-    @GET("discover/genre/movie/list")
-    suspend fun getGenres(@Query("api_key") apiKey: String): GenreResponse
-
-    @GET("/3/movie/{movie_id}/reviews")
-    suspend fun getReviews(@Path("movie_id") ids:Int,@Query("api_key") apiKey: String): ReviewResponse
+    @GET("movie/{movie_id}/reviews")
+    suspend fun getReviews(@Path("movie_id") ids: Int, @Query("api_key") apiKey: String): ReviewResponse
 }

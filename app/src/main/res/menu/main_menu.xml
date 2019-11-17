@@ -12,5 +12,4 @@
         android:icon="@drawable/ic_fav_filled"
         android:title="Favs"
         />
-
 </menu>

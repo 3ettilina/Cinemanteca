@@ -13,18 +13,20 @@ interface MovieDao {
     suspend fun getFavoriteMovies(): List<Movie>
 
     @Insert
-    suspend fun insertMovies(vararg movies: Movie)
+    suspend fun insertMovies(movies: List<Movie>)
+
+    @Delete
+    suspend fun removeMovies(movies: List<Movie>)
 
     @Query("UPDATE Movies SET isFavorite = 1 WHERE id = :movieId")
     suspend fun addFavoriteMovie(movieId: Int)
 
-    @Delete
-    suspend fun removeMovies(vararg movies: Movie)
-
-    @Query("DELETE from Movies where id = :movieId")
+    @Query("UPDATE Movies SET isFavorite = 0 where id = :movieId")
     suspend fun removeFavMovie(movieId: Int): Int
 
-    @Query("SELECT count(*) from Movies where id = :movieId ")
-    suspend fun isFavMovie(movieId: Int) : Int
+    @Update
+    suspend fun updateFavMovies(movies: List<Movie>)
 
+    @Query("SELECT isFavorite from Movies where id = :movieId AND isFavorite = 1 ")
+    suspend fun isFavMovie(movieId: Int) : Int
 }

@@ -21,7 +21,7 @@ class ReviewsFragment : Fragment() {
 
     private val viewModel: ReviewsViewModel by viewModel()
     private val adapter = ReviewAdapter()
-    private var movirId:Int =0
+    private var movieId: Int = 0
 
     companion object {
         fun newInstance() =
@@ -32,15 +32,16 @@ class ReviewsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val vw =  inflater.inflate(R.layout.fragment_reviews, container, false)
-        activity?.let{
-            val bundle:Bundle? = it.intent.extras
-            bundle?.let{bundle->
-                movirId = bundle.getInt(Constants.MOVIE_ID,0)
+        val view =  inflater.inflate(R.layout.fragment_reviews, container, false)
+
+        activity?.let { fragment ->
+            val bundle: Bundle? = fragment.intent.extras
+            bundle?.let{
+                movieId = it.getInt(Constants.MOVIE_ID)
             }
         }
 
-        return vw
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,11 +54,12 @@ class ReviewsFragment : Fragment() {
 
         //Observe changes of data/flags on the viewModel
         viewModel.reviews.observe(viewLifecycleOwner, Observer(this::reviewsLoaded))
-        viewModel.loadReviewsMovies(movirId)
+
+        viewModel.loadReviewsMovies(movieId)
         
     }
 
-    private fun reviewsLoaded(reviews:List<Review>){
+    private fun reviewsLoaded(reviews: List<Review>){
         if(reviews.size>0){
             adapter.setReviewList(reviews)
         }else{

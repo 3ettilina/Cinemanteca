@@ -28,14 +28,15 @@ class ReviewsViewModel(private val repository: MovieSourceRepository) : ViewMode
     private val localReviews = MutableLiveData<List<Review>>()
     private val localIsLoading = MutableLiveData<Boolean>()
 
-    fun loadReviewsMovies(movieId:Int){
+    fun loadReviewsMovies(movieId: Int){
         localIsLoading.postValue(true)
         launch(Dispatchers.IO){
             try {
-                val reviewList = repository.getMovieReviews(App.apiKey,movieId)
+                val reviewList = repository.getMovieReviews(movieId)
                 localReviews.postValue(reviewList)
             } catch (error: Exception){
-                Log.d("LOAD_REVIEW_EXCEPTION", "Exception when loading movie review: " + error)
+                Log.d("LOAD_REVIEW_EXCEPTION",
+                    "Exception when loading movie review: " + error)
             } finally {
                 localIsLoading.postValue(false)
             }

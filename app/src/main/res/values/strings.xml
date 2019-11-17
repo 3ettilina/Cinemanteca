@@ -3,10 +3,11 @@
 
     <string name="movie_dummy_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc maximus feugiat nunc eget congue. Fusce vel eros eu sem sagittis ultricies nec eget sapien. Sed ligula dolor, tincidunt eget commodo vitae, eleifend ac dui. Aenean sit amet nunc id lacus pulvinar finibus. Donec venenatis, elit vel vulputate ultricies, lorem magna maximus lectus, nec convallis eros libero ut ligula. Donec elementum ornare ante, id tempus quam pretium eleifend. Etiam fermentum felis ac quam elementum, ut auctor mauris pretium. Vivamus sed mollis massa. Fusce egestas orci nulla, eget facilisis ipsum maximus sit amet. Nullam vitae est molestie, accumsan purus vitae, gravida velit. Mauris convallis ipsum a sapien convallis rutrum. Sed nibh felis, bibendum nec leo vel, ornare tempus massa.</string>
 
-    <string name="add_favs_button">ADD FAV</string>
-    <string name="remove_favs_button">REMOVE FAV</string>
+    <string name="add_favs_button">ADD TO FAVS</string>
+    <string name="remove_favs_button">REMOVE FROM FAVS</string>
     <string name="sorry_not_reviews_yet">Sorry! Not reviews yet!</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="welcome_splash_screen">Welcome to Cinemanteca</string>
+    <string name="with_internet_splash_screen">Retrieving data from service...</string>
+    <string name="without_internet_splash_screen">You\'re not connected, folk! \n Retrieving data from database...</string>
 </resources>

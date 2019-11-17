@@ -14,17 +14,22 @@
         android:roundIcon="@drawable/ic_pop_corn"
         android:supportsRtl="true"
         android:networkSecurityConfig="@xml/network_security_config"
+<<<<<<< Updated upstream
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".presentation.CinemantecaActivity">
+=======
         android:theme="@style/AppTheme">
         <activity android:name=".presentation.CinemantecaActivity"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
+>>>>>>> Stashed changes
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".presentation.view.movie.MovieActivity"/>
-        <activity android:name=".presentation.view.main.MainActivity"
-            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"/>
+        <activity android:name=".presentation.view.main.MainActivity"/>
     </application>
 
 </manifest>

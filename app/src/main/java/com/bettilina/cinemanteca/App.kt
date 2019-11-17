@@ -74,6 +74,4 @@ class App: Application() {
         var imgSrcBasePath = "https://image.tmdb.org/t/p/original"
         var imgSrcBasePath500 = "https://image.tmdb.org/t/p/w500"
     }
-
-
 }

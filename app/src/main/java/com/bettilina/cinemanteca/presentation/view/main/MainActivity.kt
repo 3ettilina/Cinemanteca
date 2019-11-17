@@ -6,7 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
-import com.bettilina.cinemanteca.BottomSheetFragment
+import com.bettilina.cinemanteca.presentation.helper.BottomSheetFragment
 import com.bettilina.cinemanteca.R
 import com.bettilina.cinemanteca.presentation.view.main.favorites.FavoritesFragment
 import com.bettilina.cinemanteca.presentation.view.main.home.HomeFragment
@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         showFragment(HomeFragment(), HomeFragmentTag)
+
         bottomNav.setOnNavigationItemSelectedListener { menuItem ->
             removeActiveFragment()
 
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity() {
 
             true
         }
+
         setSupportActionBar(findViewById(R.id.my_toolbar))
 
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
@@ -74,7 +76,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.item_order -> {
-            val modalBottomSheet = BottomSheetFragment()
+            val modalBottomSheet =
+                BottomSheetFragment()
             modalBottomSheet.show(supportFragmentManager, BottomSheetFragment.TAG)
             true
         }
