@@ -28,6 +28,6 @@ interface MovieService {
     @GET("discover/genre/movie/list")
     suspend fun getGenres(@Query("api_key") apiKey: String): GenreResponse
 
-    @GET("/movie/{movie_id}/reviews")
-    suspend fun getReviews(@Query("api_key") apiKey: String,@Path("movie_id") ids:Int): ReviewResponse
+    @GET("/3/movie/{movie_id}/reviews")
+    suspend fun getReviews(@Path("movie_id") ids:Int,@Query("api_key") apiKey: String): ReviewResponse
 }

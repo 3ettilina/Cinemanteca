@@ -28,6 +28,6 @@ class CloudMovieDataStore(private var movieService: MovieService): MovieDataStor
     }
 
     override suspend fun getMovieReviews(apiKey: String, id: Int): List<Review> {
-        return  movieService.getReviews(apiKey,id).reviewList
+        return  movieService.getReviews(id,apiKey).reviewList
     }
 }

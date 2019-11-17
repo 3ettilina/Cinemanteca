@@ -65,6 +65,7 @@ class MovieFragment : Fragment(){
             fragmentManager!!
                 .beginTransaction()
                 .replace(R.id.containerMovie, ReviewsFragment.newInstance())
+                .addToBackStack(null)
                 .commit()
         }
     }

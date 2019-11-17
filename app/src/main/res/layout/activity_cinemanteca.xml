@@ -4,7 +4,7 @@
     android:layout_width="match_parent">
     <item>
         <shape>
-            <solid android:color="#3F51B5" />
+            <solid android:color="#F10606" />
         </shape>
     </item>
     <!-- You can insert your own image assets here -->

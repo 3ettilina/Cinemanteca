@@ -3,16 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    tools:context=".presentation.view.movie.reviews.ReviewsFragment">
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".presentation.view.movie.reviews.ReviewsFragment"
+    android:background="@color/colorLigthGray"
+    >
     <TextView
+        android:id="@+id/txt_TitleReview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Reviews"/>
+        android:text="Reviews"
+        android:textStyle="bold"
+        android:textSize="@android:dimen/app_icon_size"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_Reviews"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="5dp"
+        android:verticalSpacing="5dp"
     />
 </LinearLayout>

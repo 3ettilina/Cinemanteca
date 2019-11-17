@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorGray">#7C7C7C</color>
+    <color name="colorLigthGray">#F2E2E2E2</color>
+    <color name="colorGray">#B3B3B3</color>
     <color name="colorPrimary">#2E2E2E</color>
     <color name="colorPrimaryDark">#202020</color>
     <color name="colorAccent">#D54055</color>

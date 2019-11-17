@@ -174,6 +174,7 @@ class HomeFragment : Fragment() {
             )
             putExtra(Constants.MOVIE_YEAR, currentMovie.releaseDate)
             putExtra(Constants.MOVIE_DESCRIPTION, currentMovie.description)
+            putExtra(Constants.MOVIE_ID,currentMovie.id)
         }
         ContextCompat.startActivity(context!!, intent, null)
     }

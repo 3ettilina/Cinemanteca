@@ -5,4 +5,5 @@
 
     <string name="add_favs_button">ADD FAV</string>
     <string name="remove_favs_button">REMOVE FAV</string>
+    <string name="sorry_not_reviews_yet">Sorry! Not reviews yet!</string>
 </resources>

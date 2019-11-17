@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import com.bettilina.cinemanteca.R
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bettilina.cinemanteca.data.model.Review
 import com.bettilina.cinemanteca.presentation.view.main.adapter.ReviewAdapter
 import com.bettilina.cinemanteca.utils.Constants
@@ -45,17 +47,22 @@ class ReviewsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         recyclerView_Reviews.apply{
+            layoutManager = GridLayoutManager(context,1,GridLayoutManager.VERTICAL,false)
             adapter = this@ReviewsFragment.adapter
         }
 
         //Observe changes of data/flags on the viewModel
         viewModel.reviews.observe(viewLifecycleOwner, Observer(this::reviewsLoaded))
-        viewModel.loadReviewsMovies(0)
+        viewModel.loadReviewsMovies(movirId)
         
     }
 
     private fun reviewsLoaded(reviews:List<Review>){
-        adapter.reviews = reviews
+        if(reviews.size>0){
+            adapter.setReviewList(reviews)
+        }else{
+            txt_TitleReview.text=getString(R.string.sorry_not_reviews_yet)
+        }
     }
 
 }

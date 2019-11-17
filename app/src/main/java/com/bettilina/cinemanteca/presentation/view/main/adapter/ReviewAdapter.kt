@@ -1,6 +1,7 @@
 package com.bettilina.cinemanteca.presentation.view.main.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,14 +10,18 @@ import com.bettilina.cinemanteca.R
 import com.bettilina.cinemanteca.data.model.Review
 import kotlinx.android.synthetic.main.view_reviews.view.*
 
-class ReviewAdapter(): RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder>() {
-
+class ReviewAdapter: RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder>() {
     var reviews = listOf<Review>()
-        set(value) {
+       /* set(value) {
             notifyDataSetChanged()
-        }
+        }*/
 
     var context: Context? = null
+
+    fun setReviewList(reviews:List<Review>){
+        this.reviews = reviews
+        notifyDataSetChanged()
+    }
 
     //Associate the view with the viewHolder to modify its content
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
@@ -34,7 +39,7 @@ class ReviewAdapter(): RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder>() {
     inner class ReviewViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         //Assigns attributes of the movie to the itemView, to update the view contents.
         fun bind(review: Review){
-            itemView.txt_UserName.text = review.author
+            itemView.txt_UserName.text = review.author.toUpperCase()
             itemView.txt_ReviewText.text = review.content
         }
     }
