@@ -12,6 +12,7 @@ import com.bettilina.cinemanteca.data.repository.MovieSourceRepository
 import com.bettilina.cinemanteca.data.repository.movies.DatabaseMovieDataStore
 import com.bettilina.cinemanteca.data.service.MovieService
 import com.bettilina.cinemanteca.utils.Constants
+import com.bettilina.cinemanteca.utils.OrderCriterial
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -105,5 +106,17 @@ class HomeViewModel(private val repository: MovieSourceRepository,
                 localIsLoading.postValue(false)
             }
         }
+    }
+
+    fun orderView(criterial : OrderCriterial){
+        val adapt = movies.value
+        adapt?.let{
+            var sortedList = when(criterial){
+                OrderCriterial.AVERAGE -> adapt.sortedByDescending{ movie ->movie.voteAverage.toString() }
+                OrderCriterial.TITLE -> adapt.sortedBy{ movie ->movie.title }
+            }
+            localMovies.postValue(sortedList)
+        }
+
     }
 }

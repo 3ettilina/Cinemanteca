@@ -6,11 +6,9 @@ import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.MotionEvent
-import android.view.View
-import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -22,14 +20,19 @@ import com.bettilina.cinemanteca.R
 import com.bettilina.cinemanteca.data.model.Genre
 import com.bettilina.cinemanteca.data.model.Movie
 import com.bettilina.cinemanteca.presentation.helper.visibleIf
+import com.bettilina.cinemanteca.presentation.view.main.MainActivity
 import com.bettilina.cinemanteca.presentation.view.main.adapter.MovieAdapter
 import com.bettilina.cinemanteca.presentation.view.main.helper.CustomRecyclerViewItemTouchListener
 import com.bettilina.cinemanteca.presentation.view.movie.MovieActivity
 import com.bettilina.cinemanteca.presentation.view.movie.MovieGenresViewModel
 import com.bettilina.cinemanteca.utils.Constants
+import com.bettilina.cinemanteca.utils.OrderCriterial
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.view_movie.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import kotlinx.android.synthetic.main.fragment_bottom_sheet.*
+
 
 class HomeFragment : Fragment() {
 
@@ -70,6 +73,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun moviesLoaded(movies: List<Movie>){
+        Log.d("asdasd",movies[1].title)
         adapter.movies = movies
     }
 
@@ -194,4 +198,9 @@ class HomeFragment : Fragment() {
             hasConsumed
         }
     }
+
+    fun orderView(criterial : OrderCriterial){
+        viewModel.orderView(criterial)
+    }
+
 }

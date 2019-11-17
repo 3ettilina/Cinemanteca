@@ -1,70 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/colorLigthGray"
-    android:paddingTop="20dp"
-    android:paddingStart="15dp"
-    android:paddingEnd="15dp"
     tools:context=".presentation.view.main.home.HomeFragment">
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:paddingTop="20dp"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp">
 
-        <EditText
-            android:id="@+id/txt_MovieSearch"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableRight="@drawable/ic_clear_black_24dp"
-            android:hint="Tap to Search"/>
+            android:orientation="horizontal">
 
+            <EditText
+                android:id="@+id/txt_MovieSearch"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/ic_clear_black_24dp"
+                android:hint="Tap to Search"/>
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatRatingBar
+            android:id="@+id/ratingBar_Search"
+            android:layout_width="wrap_content"
+            android:layout_height="43dp"
+            android:layout_gravity="center"
+            android:numStars="5"
+            android:stepSize="1.0"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="MORE POPULAR"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:layout_margin="15dp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView_Movies"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:spanCount="2"
+                android:verticalSpacing="5dp"
+                android:horizontalSpacing="5dp"
+                />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/loading_Movies"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_fileName="loading.json" />
+
+        </RelativeLayout>
     </LinearLayout>
 
-    <androidx.appcompat.widget.AppCompatRatingBar
-        android:id="@+id/ratingBar_Search"
-        android:layout_width="wrap_content"
-        android:layout_height="43dp"
-        android:layout_gravity="center"
-        android:numStars="5"
-        android:stepSize="1.0"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="MORE POPULAR"
-        android:textSize="20sp"
-        android:textAlignment="center"
-        android:textStyle="bold"
-        android:layout_margin="15dp"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="5">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView_Movies"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:spanCount="2"
-            android:verticalSpacing="5dp"
-            android:horizontalSpacing="5dp"
-            />
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/loading_Movies"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_fileName="loading.json" />
-
-    </RelativeLayout>
-
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

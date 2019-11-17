@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottomSheet"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/darker_gray"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="56dp"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="Order by:"
+                android:textSize="15dp"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/txt_OrderAverage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:padding="16dp"
+                android:gravity="center_vertical"
+                android:drawablePadding="16dp"
+                android:drawableLeft="@drawable/ic_star_black_24dp"
+                android:drawableStart="@drawable/ic_star_black_24dp"
+                android:text="Rating"
+                android:textSize="16sp" />
+
+            <View
+                android:id="@+id/favView"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#bdbdbd"
+                app:layout_constraintTop_toBottomOf="@id/txt_OrderAverage" />
+
+        <TextView
+            android:id="@+id/txt_OrderText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_format_color_text_black_24dp"
+            android:drawableLeft="@drawable/ic_format_color_text_black_24dp"
+            android:drawablePadding="16dp"
+            android:fontFamily="sans-serif"
+            android:gravity="center_vertical"
+            android:padding="16dp"
+            android:text="Text"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/favView" />
+
+        <View
+                android:id="@+id/twitterView"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#bdbdbd"
+                app:layout_constraintTop_toBottomOf="@id/txt_OrderText" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
