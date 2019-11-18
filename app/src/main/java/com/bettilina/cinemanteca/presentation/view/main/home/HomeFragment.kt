@@ -5,12 +5,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
-import android.view.*
-import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.MotionEvent
+import android.view.View
+import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,7 +20,6 @@ import com.bettilina.cinemanteca.App
 import com.bettilina.cinemanteca.R
 import com.bettilina.cinemanteca.data.model.Movie
 import com.bettilina.cinemanteca.presentation.helper.visibleIf
-import com.bettilina.cinemanteca.presentation.view.main.MainActivity
 import com.bettilina.cinemanteca.presentation.view.main.adapter.MovieAdapter
 import com.bettilina.cinemanteca.presentation.view.main.helper.CustomRecyclerViewItemTouchListener
 import com.bettilina.cinemanteca.presentation.view.movie.MovieActivity
@@ -28,10 +29,6 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.view_movie.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import kotlinx.android.synthetic.main.fragment_bottom_sheet.*
-import okhttp3.internal.wait
-import okhttp3.internal.waitMillis
 
 
 class HomeFragment : Fragment() {

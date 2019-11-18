@@ -16,7 +16,7 @@ class MovieAdapter(private val glide: RequestManager): RecyclerView.Adapter<Movi
 
     var movies = listOf<Movie>()
         set(value) {
-            field = value.sortedByDescending { it.popularity }
+            field = value//.sortedByDescending { it.popularity }
             notifyDataSetChanged()
         }
 
@@ -51,6 +51,7 @@ class MovieAdapter(private val glide: RequestManager): RecyclerView.Adapter<Movi
             itemView.txt_Favorites.setText(setFavButtonText(movie))
             itemView.chk_Fav.isChecked = (movie.isFavorite==1)
             if(movie.isFavorite==1) itemView.btn_Favorites.setBackgroundResource(R.drawable.movie_button_border_remove_fav)
+                else itemView.btn_Favorites.setBackgroundResource(R.drawable.movie_button_border_add_fav)
 
         }
 

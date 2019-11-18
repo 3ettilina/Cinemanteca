@@ -64,12 +64,10 @@ class HomeViewModel(private val repository: MovieSourceRepository,
     }
 
     fun addFavoriteMovie(movieId: Int){
-
         launch(Dispatchers.IO){
             try {
                 dbDataStore.addFavorite(movieId)
                 val isfav = isFavoriteMovie(movieId)
-                Log.d("nuevofav",isfav.toString())
             } catch (error: Exception){
                 Log.d("ADD_FAVS_EXC", "Exception when adding movie to favorites: " + error)
             }
@@ -92,11 +90,9 @@ class HomeViewModel(private val repository: MovieSourceRepository,
         launch(Dispatchers.IO){
             try {
                 isFavorite = dbDataStore.isFavoriteMovie(movieID)
-                Log.d("nuevofav",isFavorite.toString())
             } catch (error: Exception){
                 Log.d("REMOVE_FAV_EXC", "Exception when removing movie from favorites: " + error)
             }
-
         }
         /*Sin el sleep la operación retorna antes de que la corrutina finalice, por lo que siempre devuelve false*/
         Thread.sleep(100)
