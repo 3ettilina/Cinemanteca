@@ -29,10 +29,13 @@ class FavoritesViewModel(private val dbDataStore: DatabaseMovieDataStore): ViewM
     private val localIsLoading = MutableLiveData<Boolean>()
 
     fun loadFavMovies(){
+        Log.d("asdsadsdsda","1")
         localIsLoading.postValue(true)
         launch(Dispatchers.IO){
             try {
+                Log.d("asdsadsdsda","2")
                 val movies = dbDataStore.getFavoriteMovies()
+                Log.d("asdsadsdsda",movies.size.toString())
                 localMovies.postValue(movies)
             } catch (exception: Exception){
 

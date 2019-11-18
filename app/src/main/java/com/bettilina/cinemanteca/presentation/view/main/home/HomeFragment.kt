@@ -30,6 +30,8 @@ import kotlinx.android.synthetic.main.view_movie.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.fragment_bottom_sheet.*
+import okhttp3.internal.wait
+import okhttp3.internal.waitMillis
 
 
 class HomeFragment : Fragment() {
@@ -71,7 +73,8 @@ class HomeFragment : Fragment() {
 
     private fun moviesLoaded(movies: List<Movie>){
         movies.forEach {
-            if(viewModel.isFavoriteMovie(it.id) == 1){
+            val isFav = viewModel.isFavoriteMovie(it.id)
+            if(isFav == 1){
                 it.isFavorite = 1
             }
         }
@@ -139,8 +142,7 @@ class HomeFragment : Fragment() {
 
     private fun addToFavorites(itemView: View, position: Int){
         //Change button background color
-        itemView.btn_Favorites.background =
-            resources.getDrawable(R.drawable.movie_button_border_remove_fav)
+        itemView.btn_Favorites.setBackgroundResource(R.drawable.movie_button_border_remove_fav)
         //Update movie as favorite one on database
         val movieId = adapter.movies[position].id
         viewModel.addFavoriteMovie(movieId)
@@ -156,8 +158,7 @@ class HomeFragment : Fragment() {
 
     private fun removeFromFavorites(itemView: View, position: Int){
         //Change button background color
-        itemView.btn_Favorites.background =
-            resources.getDrawable(R.drawable.movie_button_border_add_fav)
+        itemView.btn_Favorites.setBackgroundResource(R.drawable.movie_button_border_add_fav)
 
         //Update movie as favorite one on database
         val movieId = adapter.movies[position].id

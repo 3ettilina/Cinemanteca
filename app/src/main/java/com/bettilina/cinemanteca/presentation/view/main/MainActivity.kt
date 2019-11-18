@@ -26,45 +26,15 @@ class MainActivity : AppCompatActivity() {
 
         bottomNav.setOnNavigationItemSelectedListener { menuItem ->
             removeActiveFragment()
-
             when(menuItem.itemId){
                 R.id.home -> showFragment(HomeFragment(), HomeFragmentTag)
                 R.id.favorites -> showFragment(FavoritesFragment(), FavsFragmentTag)
             }
-
             true
         }
 
         setSupportActionBar(findViewById(R.id.my_toolbar))
-
-        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
-        bottomSheetBehavior.bottomSheetCallback = object : BottomSheetBehavior.BottomSheetCallback() {
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {
-
-            }
-
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
-                when (newState) {
-                    BottomSheetBehavior.STATE_COLLAPSED -> {
-                        //btn_slide.text = "Slide Up"
-                    }
-                    BottomSheetBehavior.STATE_HIDDEN -> {
-
-                    }
-                    BottomSheetBehavior.STATE_EXPANDED -> {
-                        // btn_slide.text = "Slide Down"
-                    }
-                    BottomSheetBehavior.STATE_DRAGGING -> {
-
-                    }
-                    BottomSheetBehavior.STATE_SETTLING -> {
-
-                    }
-                }
-            }
-        }
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-
+        bottomSheetBehavior=initBottomSheetBehavior()
 
     }
 
@@ -105,10 +75,39 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun initBottomSheetBehavior():BottomSheetBehavior<*>{
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
+        bottomSheetBehavior.bottomSheetCallback = object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+            }
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                when (newState) {
+                    BottomSheetBehavior.STATE_COLLAPSED -> {
+                        //btn_slide.text = "Slide Up"
+                    }
+                    BottomSheetBehavior.STATE_HIDDEN -> {
 
+                    }
+                    BottomSheetBehavior.STATE_EXPANDED -> {
+                        // btn_slide.text = "Slide Down"
+                    }
+                    BottomSheetBehavior.STATE_DRAGGING -> {
+
+                    }
+                    BottomSheetBehavior.STATE_SETTLING -> {
+
+                    }
+                }
+            }
+        }
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+        return bottomSheetBehavior
+    }
 
     companion object{
         private const val HomeFragmentTag = "HomeFragmentTag"
         private const val FavsFragmentTag = "FavsFragmentTag"
     }
+
+
 }

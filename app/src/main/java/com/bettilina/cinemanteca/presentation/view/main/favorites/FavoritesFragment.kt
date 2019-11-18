@@ -3,6 +3,7 @@ package com.bettilina.cinemanteca.presentation.view.main.favorites
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,6 +54,7 @@ class FavoritesFragment: Fragment() {
         }
 
         //Call viewModel methods
+
         viewModel.loadFavMovies()
 
         //Attach observers to notify local methods
