@@ -33,7 +33,7 @@ class FavoritesViewModel(private val dbDataStore: DatabaseMovieDataStore): ViewM
         localIsLoading.postValue(true)
         launch(Dispatchers.IO){
             //Delay so the user can see the loading icon - LOL!
-            kotlinx.coroutines.delay(3000)
+            kotlinx.coroutines.delay(1000)
             try {
                 val movies = dbDataStore.getFavoriteMovies()
                 localMovies.postValue(movies)

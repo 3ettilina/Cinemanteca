@@ -101,7 +101,7 @@ class HomeViewModel(private val repository: MovieSourceRepository,
         localIsLoading.postValue(true)
         launch(Dispatchers.IO){
             //Delay so the user can see the loading icon - LOL!
-            kotlinx.coroutines.delay(3000)
+            kotlinx.coroutines.delay(1000)
             try {
                 val movies = repository.getMovies()
                 movies.forEach{ movie ->
@@ -121,7 +121,7 @@ class HomeViewModel(private val repository: MovieSourceRepository,
         localIsLoading.postValue(true)
         launch(Dispatchers.IO){
             //Delay so the user can see the loading icon - LOL!
-            kotlinx.coroutines.delay(3000)
+            kotlinx.coroutines.delay(1000)
             try {
                 val movies = repository.getMoviesBySearch(query)
                 movies.forEach{ movie ->
@@ -141,7 +141,7 @@ class HomeViewModel(private val repository: MovieSourceRepository,
         localIsLoading.postValue(true)
         launch(Dispatchers.IO){
             //Delay so the user can see the loading icon - LOL!
-            kotlinx.coroutines.delay(3000)
+            kotlinx.coroutines.delay(1000)
             try {
                 val init:Int = (ratingFilter.toInt() *2 ) -2
                 val end:Int = (ratingFilter.toInt() *2 )
@@ -164,7 +164,7 @@ class HomeViewModel(private val repository: MovieSourceRepository,
         localIsLoading.postValue(true)
         launch(Dispatchers.IO) {
             //Delay so the user can see the loading icon - LOL!
-            kotlinx.coroutines.delay(3000)
+            kotlinx.coroutines.delay(1000)
             try {
                 val moviesList = repository.getMoviesBySearch(txtSearch)
                 //TODO: Call endpoint instead of filtering the list
