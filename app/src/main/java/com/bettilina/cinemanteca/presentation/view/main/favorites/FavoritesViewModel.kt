@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.bettilina.cinemanteca.data.model.Movie
 import com.bettilina.cinemanteca.data.repository.MovieSourceRepository
 import com.bettilina.cinemanteca.data.repository.movies.DatabaseMovieDataStore
+import com.bettilina.cinemanteca.utils.OrderCriterial
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -63,6 +64,17 @@ class FavoritesViewModel(private val dbDataStore: DatabaseMovieDataStore): ViewM
             } catch (error: java.lang.Exception){
                 Log.d("REMOVE_FAV_EXC", "Exception when removing movie from favorites: " + error)
             }
+        }
+    }
+
+    fun orderView(criterial : OrderCriterial){
+        val adapt = movies.value
+        adapt?.let{
+            var sortedList = when(criterial){
+                OrderCriterial.AVERAGE -> adapt.sortedByDescending{ movie ->movie.voteAverage.toString() }
+                OrderCriterial.TITLE -> adapt.sortedBy{ movie ->movie.title }
+            }
+            localMovies.postValue(sortedList)
         }
     }
 }

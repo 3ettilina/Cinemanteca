@@ -26,4 +26,8 @@ class CloudMovieDataStore(private var movieService: MovieService,
     override suspend fun getMovieReviews(id: Int): List<Review> {
         return  movieService.getReviews(id,apiKey).reviewList
     }
+
+    override suspend fun existsMovie(id: Int): Boolean {
+        return false
+    }
 }

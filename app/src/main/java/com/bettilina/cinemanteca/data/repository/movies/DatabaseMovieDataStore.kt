@@ -45,6 +45,17 @@ class DatabaseMovieDataStore (private val movieDao: MovieDao): MovieDataStore{
         }
     }
 
+    override suspend fun existsMovie(id: Int): Boolean {
+        var existsMovie = false
+        try {
+            existsMovie = movieDao.existMovie(id)
+            Log.d("DB_MOVIES_EXISTS", "Consulting if movie exists in database")
+        } catch (error: Exception){
+            Log.d("DB_MOVIES_EXISTS_ERR", "Error while Consulting if movie exists in database: $error")
+        }
+        return existsMovie
+    }
+
     suspend fun updateFavMovies(movies: List<Movie>){
         try {
             movieDao.updateFavMovies(movies)

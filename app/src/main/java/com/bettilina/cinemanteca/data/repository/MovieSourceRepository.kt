@@ -14,4 +14,6 @@ interface MovieSourceRepository {
     suspend fun getMoviesBySearch(txtSearch: String): List<Movie>
 
     suspend fun getMovieReviews(id: Int): List<Review>
+
+    suspend fun existsMovie(id: Int): Boolean
 }

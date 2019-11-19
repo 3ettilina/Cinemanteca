@@ -81,27 +81,15 @@ class MainActivity : AppCompatActivity() {
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
             }
             override fun onStateChanged(bottomSheet: View, newState: Int) {
-                when (newState) {
-                    BottomSheetBehavior.STATE_COLLAPSED -> {
-                        //btn_slide.text = "Slide Up"
-                    }
-                    BottomSheetBehavior.STATE_HIDDEN -> {
 
-                    }
-                    BottomSheetBehavior.STATE_EXPANDED -> {
-                        // btn_slide.text = "Slide Down"
-                    }
-                    BottomSheetBehavior.STATE_DRAGGING -> {
-
-                    }
-                    BottomSheetBehavior.STATE_SETTLING -> {
-
-                    }
-                }
             }
         }
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
         return bottomSheetBehavior
+    }
+
+    fun hideBottomSheet(){
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
     }
 
     companion object{

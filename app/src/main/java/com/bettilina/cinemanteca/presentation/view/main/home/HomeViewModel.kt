@@ -63,11 +63,13 @@ class HomeViewModel(private val repository: MovieSourceRepository,
         }
     }
 
-    fun addFavoriteMovie(movieId: Int){
+    fun addFavoriteMovie(movie: Movie){
         launch(Dispatchers.IO){
             try {
-                dbDataStore.addFavorite(movieId)
-                val isfav = isFavoriteMovie(movieId)
+                if(!dbDataStore.existsMovie(movie.id)){
+                    dbDataStore.saveMovies(listOf(movie))
+                }
+                dbDataStore.addFavorite(movie.id)
             } catch (error: Exception){
                 Log.d("ADD_FAVS_EXC", "Exception when adding movie to favorites: " + error)
             }
@@ -84,18 +86,13 @@ class HomeViewModel(private val repository: MovieSourceRepository,
         }
     }
 
-    fun isFavoriteMovie(movieID: Int): Int{
+    private suspend fun isFavorite(movieID: Int): Int{
         var isFavorite = 0
-
-        launch(Dispatchers.IO){
-            try {
-                isFavorite = dbDataStore.isFavoriteMovie(movieID)
-            } catch (error: Exception){
-                Log.d("REMOVE_FAV_EXC", "Exception when removing movie from favorites: " + error)
-            }
+        try {
+            isFavorite = dbDataStore.isFavoriteMovie(movieID)
+        } catch (error: Exception){
+            Log.d("REMOVE_FAV_EXC", "Exception when removing movie from favorites: " + error)
         }
-        /*Sin el sleep la operación retorna antes de que la corrutina finalice, por lo que siempre devuelve false*/
-        Thread.sleep(100)
         return isFavorite
     }
 
@@ -104,6 +101,9 @@ class HomeViewModel(private val repository: MovieSourceRepository,
         launch(Dispatchers.IO){
             try {
                 val movies = repository.getMovies()
+                movies.forEach{ movie ->
+                    movie.isFavorite = isFavorite(movie.id)
+                }
                 localMovies.postValue(movies)
             } catch (error: Exception){
                 Log.d("LOAD_MOVIES_EXCEPTION",
@@ -119,6 +119,9 @@ class HomeViewModel(private val repository: MovieSourceRepository,
         launch(Dispatchers.IO){
             try {
                 val movies = repository.getMoviesBySearch(query)
+                movies.forEach{ movie ->
+                    movie.isFavorite = isFavorite(movie.id)
+                }
                 localMovies.postValue(movies)
             } catch (error: Exception){
                 Log.d("LOAD_MOVIES_EXCEPTION",
@@ -137,7 +140,9 @@ class HomeViewModel(private val repository: MovieSourceRepository,
                 val end:Int = (ratingFilter.toInt() *2 )
 
                 val moviesList = repository.getMoviesByVoteAvg(init, end)
-
+                moviesList.forEach{ movie ->
+                    movie.isFavorite = isFavorite(movie.id)
+                }
                 localMovies.postValue(moviesList)
             } catch (error: Exception){
                 Log.d("LOAD_MOVIES_EXCEPTION",
@@ -158,6 +163,9 @@ class HomeViewModel(private val repository: MovieSourceRepository,
                 val end: Int = (ratingFilter.toInt() * 2)
                 val filterList =
                     moviesList.filter { movie -> movie.voteAverage.toInt() in init..end }
+                filterList.forEach{ movie ->
+                    movie.isFavorite = isFavorite(movie.id)
+                }
                 localMovies.postValue(filterList)
             } catch (error: Exception) {
                 Log.d("LOAD_MOVIES_EXCEPTION",

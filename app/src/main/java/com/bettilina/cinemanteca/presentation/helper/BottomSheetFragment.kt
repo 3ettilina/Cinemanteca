@@ -1,23 +1,19 @@
 package com.bettilina.cinemanteca.presentation.helper
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bettilina.cinemanteca.R
+import com.bettilina.cinemanteca.presentation.view.main.favorites.FavoritesFragment
 import com.bettilina.cinemanteca.presentation.view.main.home.HomeFragment
 import com.bettilina.cinemanteca.utils.OrderCriterial
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.fragment_bottom_sheet.*
 
-
-class BottomSheetFragment() : BottomSheetDialogFragment() {
+class BottomSheetFragment : BottomSheetDialogFragment() {
 
     private var fragmentView: View? = null
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         fragmentView = inflater.inflate(R.layout.fragment_bottom_sheet, container, false)
@@ -33,39 +29,32 @@ class BottomSheetFragment() : BottomSheetDialogFragment() {
         txt_OrderAverage.setOnClickListener {
             fragmentManager?.let {
                 val homeFragment =
-                    it.findFragmentByTag(HomeFragmentTag) as HomeFragment
+                    it.findFragmentByTag(HomeFragmentTag) as HomeFragment?
                 val favsFragment =
-                    it.findFragmentByTag(HomeFragmentTag) as HomeFragment
+                    it.findFragmentByTag(FavsFragmentTag) as FavoritesFragment?
                 homeFragment?.let {
-                    homeFragment.isVisible?.let {
-                        /*Order by average*/
-                        val rv = homeFragment.orderView(OrderCriterial.AVERAGE)
-                    }
+                    /*Order by average*/
+                    homeFragment.orderView(OrderCriterial.AVERAGE)
                 }
                 favsFragment?.let {
-                    favsFragment.isVisible?.let {
-                        /*Order by title*/
-                    }
+                    /*Order by average*/
+                    favsFragment.orderView(OrderCriterial.AVERAGE)
                 }
             }
-
         }
         txt_OrderText.setOnClickListener {
             fragmentManager?.let {
                 val homeFragment =
-                    it.findFragmentByTag(HomeFragmentTag) as HomeFragment
+                    it.findFragmentByTag(HomeFragmentTag) as HomeFragment?
                 val favsFragment =
-                    it.findFragmentByTag(HomeFragmentTag) as HomeFragment
+                    it.findFragmentByTag(FavsFragmentTag) as FavoritesFragment?
                 homeFragment?.let {
-                    homeFragment.isVisible?.let {
-                        /*Order by title*/
-                        val rv = homeFragment.orderView(OrderCriterial.TITLE)
-                    }
+                    /*Order by title*/
+                    homeFragment.orderView(OrderCriterial.TITLE)
                 }
                 favsFragment?.let {
-                    favsFragment.isVisible?.let {
-                        /*Order by average*/
-                    }
+                    /*Order by average*/
+                    favsFragment.orderView(OrderCriterial.TITLE)
                 }
             }
         }

@@ -25,4 +25,8 @@ class MovieSourceDataRepository(var factory: MovieDataStoreFactory): MovieSource
     override suspend fun getMovieReviews(id: Int): List<Review> {
         return factory.movieDataStoreFactory.getMovieReviews(id)
     }
+
+    override suspend fun existsMovie(id: Int): Boolean {
+        return factory.movieDataStoreFactory.existsMovie(id)
+    }
 }

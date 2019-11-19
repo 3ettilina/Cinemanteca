@@ -22,6 +22,7 @@ import com.bettilina.cinemanteca.presentation.view.main.adapter.MovieAdapter
 import com.bettilina.cinemanteca.presentation.view.main.helper.CustomRecyclerViewItemTouchListener
 import com.bettilina.cinemanteca.presentation.view.movie.MovieActivity
 import com.bettilina.cinemanteca.utils.Constants
+import com.bettilina.cinemanteca.utils.OrderCriterial
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_favorites.*
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -152,5 +153,9 @@ class FavoritesFragment: Fragment() {
         }
 
         ContextCompat.startActivity(context!!, intent, null)
+    }
+
+    fun orderView(criterial : OrderCriterial){
+        viewModel.orderView(criterial)
     }
 }

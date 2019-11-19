@@ -69,12 +69,6 @@ class HomeFragment : Fragment() {
     }
 
     private fun moviesLoaded(movies: List<Movie>){
-        movies.forEach {
-            val isFav = viewModel.isFavoriteMovie(it.id)
-            if(isFav == 1){
-                it.isFavorite = 1
-            }
-        }
         adapter.movies = movies
         viewModel.saveMoviesToDB(movies)
     }
@@ -141,8 +135,8 @@ class HomeFragment : Fragment() {
         //Change button background color
         itemView.btn_Favorites.setBackgroundResource(R.drawable.movie_button_border_remove_fav)
         //Update movie as favorite one on database
-        val movieId = adapter.movies[position].id
-        viewModel.addFavoriteMovie(movieId)
+        val movie = adapter.movies[position]
+        viewModel.addFavoriteMovie(movie)
 
         //Show message to user
         Toast.makeText(view?.context,
