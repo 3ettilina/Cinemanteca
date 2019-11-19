@@ -15,4 +15,6 @@
 
 
     <color name="appBackgroudColor">#bdbdbd</color>
+    <color name="color_background_not_connection">#ADADAD</color>
+    <color name="color_text_no_connection">#B30303</color>
 </resources>

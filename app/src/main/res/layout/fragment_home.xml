@@ -31,7 +31,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:id="@+id/layout_Rating">
 
         <TextView
             android:layout_width="wrap_content"
@@ -51,7 +52,19 @@
             android:layout_gravity="center"
             android:layout_marginEnd="20dp"/>
     </LinearLayout>
+    <TextView
+        android:id="@+id/txt_nonConnection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/string_non_connection"
+        android:gravity="center"
+        android:background="@drawable/shape_non_internet"
+        android:textColor="@color/color_text_no_connection"
+        android:padding="5dp"
+        android:textStyle="bold"
 
+        android:shadowRadius="@android:integer/config_shortAnimTime"
+        />
 
     <TextView
         android:layout_width="match_parent"

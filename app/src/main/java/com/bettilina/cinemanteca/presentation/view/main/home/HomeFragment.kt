@@ -1,6 +1,7 @@
 package com.bettilina.cinemanteca.presentation.view.main.home
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -18,7 +19,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bettilina.cinemanteca.App
 import com.bettilina.cinemanteca.R
+import com.bettilina.cinemanteca.data.helper.NetworkingManager
 import com.bettilina.cinemanteca.data.model.Movie
+import com.bettilina.cinemanteca.presentation.helper.gone
+import com.bettilina.cinemanteca.presentation.helper.visible
 import com.bettilina.cinemanteca.presentation.helper.visibleIf
 import com.bettilina.cinemanteca.presentation.view.main.adapter.MovieAdapter
 import com.bettilina.cinemanteca.presentation.view.main.helper.CustomRecyclerViewItemTouchListener
@@ -28,6 +32,7 @@ import com.bettilina.cinemanteca.utils.OrderCriterial
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.view_movie.view.*
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -35,6 +40,7 @@ class HomeFragment : Fragment() {
 
     private val viewModel: HomeViewModel by viewModel()
     private lateinit var adapter: MovieAdapter
+    private val networkingManager: NetworkingManager by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,6 +67,8 @@ class HomeFragment : Fragment() {
 
         adapter.context = context
 
+        //Validate connection for hide fields
+        checkConnection()
         //Set listeners
         setSearchTextChangeListener()
         setRatingBarChangeListener()
@@ -68,6 +76,11 @@ class HomeFragment : Fragment() {
         setMovieItemListeners(recyclerView_Movies)
     }
 
+    override fun onResume() {
+        super.onResume()
+        //Validate connection for hide fields
+        checkConnection()
+    }
     private fun moviesLoaded(movies: List<Movie>){
         adapter.movies = movies
         viewModel.saveMoviesToDB(movies)
@@ -203,4 +216,15 @@ class HomeFragment : Fragment() {
         viewModel.orderView(criterial)
     }
 
+    private fun checkConnection(){
+        if(!networkingManager.isNetworkOnline()) {
+            txt_MovieSearch.gone()
+            layout_Rating.gone()
+            txt_nonConnection.visible()
+        }else{
+            txt_MovieSearch.visible()
+            layout_Rating.visible()
+            txt_nonConnection.gone()
+        }
+    }
 }
