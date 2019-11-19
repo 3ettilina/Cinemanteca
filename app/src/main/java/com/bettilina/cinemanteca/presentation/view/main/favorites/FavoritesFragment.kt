@@ -17,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bettilina.cinemanteca.App
 import com.bettilina.cinemanteca.R
 import com.bettilina.cinemanteca.data.model.Movie
+import com.bettilina.cinemanteca.presentation.helper.gone
+import com.bettilina.cinemanteca.presentation.helper.visible
 import com.bettilina.cinemanteca.presentation.helper.visibleIf
 import com.bettilina.cinemanteca.presentation.view.main.adapter.MovieAdapter
 import com.bettilina.cinemanteca.presentation.view.main.helper.CustomRecyclerViewItemTouchListener
@@ -67,7 +69,15 @@ class FavoritesFragment: Fragment() {
     }
 
     private fun favMoviesLoaded(movies: List<Movie>){
-        adapter.movies = movies
+        if(movies.size>0){
+            text_nonFavs.gone()
+            relativeL_Favs.visible()
+            adapter.movies = movies
+        }else{
+            text_nonFavs.visible()
+            relativeL_Favs.gone()
+        }
+
     }
 
     private fun loadingStateChanged(isLoading : Boolean){
