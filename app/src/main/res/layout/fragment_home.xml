@@ -58,7 +58,7 @@
         android:layout_height="wrap_content"
         android:text="@string/string_non_connection"
         android:gravity="center"
-        android:background="@drawable/shape_non_internet"
+        android:background="@drawable/shape_border_rounded"
         android:textColor="@color/color_text_no_connection"
         android:padding="5dp"
         android:textStyle="bold"
@@ -95,7 +95,7 @@
             android:layout_height="wrap_content"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
-            app:lottie_fileName="loading.json" />
+            app:lottie_fileName="loading-film.json" />
 
     </RelativeLayout>
 

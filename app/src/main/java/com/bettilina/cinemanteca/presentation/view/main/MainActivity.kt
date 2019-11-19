@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         setSupportActionBar(findViewById(R.id.my_toolbar))
-        bottomSheetBehavior=initBottomSheetBehavior()
+        bottomSheetBehavior = initBottomSheetBehavior()
 
     }
 
@@ -77,13 +77,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun initBottomSheetBehavior():BottomSheetBehavior<*>{
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
-        bottomSheetBehavior.bottomSheetCallback = object : BottomSheetBehavior.BottomSheetCallback() {
+        bottomSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
             }
             override fun onStateChanged(bottomSheet: View, newState: Int) {
 
             }
-        }
+        })
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
         return bottomSheetBehavior
     }
@@ -96,6 +96,4 @@ class MainActivity : AppCompatActivity() {
         private const val HomeFragmentTag = "HomeFragmentTag"
         private const val FavsFragmentTag = "FavsFragmentTag"
     }
-
-
 }

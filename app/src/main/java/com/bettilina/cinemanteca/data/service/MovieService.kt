@@ -11,10 +11,6 @@ interface MovieService {
     @GET("discover/movie/")
     suspend fun getMovies(@Query("api_key") apiKey: String): MovieResponse
 
-    @GET("discover/movie/")
-    suspend fun getMoviesByPage(@Query("api_key") apiKey: String,
-                                @Query("page") pageNumber: Int): MovieResponse
-
     @GET("search/movie/")
     suspend fun searchMovie(@Query("api_key") apiKey: String,
                             @Query("query") queryToSearch: String): MovieResponse

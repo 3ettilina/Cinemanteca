@@ -40,18 +40,40 @@
             android:layout_height="wrap_content"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
-            app:lottie_fileName="loading.json" />
+            app:lottie_fileName="loading-film.json" />
 
     </RelativeLayout>
-    <TextView
-        android:id="@+id/text_nonFavs"
+
+
+    <LinearLayout
+        android:id="@+id/layout_nonFavs"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:padding="80dp"
-        android:textStyle="bold"
-        android:textSize="18dp"
-        android:text="You don't have any favorite movie yet."
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:padding="15dp"
         android:visibility="gone"
-        />
+        android:background="@drawable/shape_border_rounded">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:text="@string/no_favs_movies_yet"/>
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/no_Favs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:lottie_autoPlay="false"
+            app:lottie_loop="true"
+            app:lottie_fileName="no_fav_movies.json" />
+
+    </LinearLayout>
+
+
 </LinearLayout>

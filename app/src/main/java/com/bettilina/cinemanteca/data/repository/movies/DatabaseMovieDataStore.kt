@@ -7,20 +7,19 @@ import com.bettilina.cinemanteca.data.model.Review
 import com.bettilina.cinemanteca.data.service.response.MovieResponse
 import com.bettilina.cinemanteca.data.service.response.ReviewResponse
 
-class DatabaseMovieDataStore (private val movieDao: MovieDao): MovieDataStore{
+open class DatabaseMovieDataStore (private val movieDao: MovieDao): MovieDataStore{
 
     override suspend fun getMovies(): List<Movie> {
-        return movieDao.getMovies()
+        var movies = listOf<Movie>()
+        try {
+            movies = movieDao.getMovies()
+            Log.d("DB_MOVIES_GET", "Successful retrieval of movies list")
+        } catch (error: Exception){
+            Log.d("DB_MOVIES_GET_ERR", "Error while trying to retrieve list of movies: $error")
+        }
+        return movies
     }
 
-    //If the user doesn't have internet connection, won't be able to load more movies
-    //on the scroll view.
-    override suspend fun getMoviesByPage(pageNumber: Int): List<Movie> {
-        return MovieResponse(listOf()).movieList
-    }
-
-    //TODO: check how to create the query on the MovieDao class to return
-    // movies by VoteAvg
     override suspend fun getMoviesByVoteAvg(
         minVote: Int,
         maxVote: Int
@@ -48,7 +47,7 @@ class DatabaseMovieDataStore (private val movieDao: MovieDao): MovieDataStore{
     override suspend fun existsMovie(id: Int): Boolean {
         var existsMovie = false
         try {
-            existsMovie = movieDao.existMovie(id)
+            existsMovie = movieDao.doesMovieExist(id)
             Log.d("DB_MOVIES_EXISTS", "Consulting if movie exists in database")
         } catch (error: Exception){
             Log.d("DB_MOVIES_EXISTS_ERR", "Error while Consulting if movie exists in database: $error")
@@ -76,18 +75,22 @@ class DatabaseMovieDataStore (private val movieDao: MovieDao): MovieDataStore{
         return movies
     }
 
-    suspend fun addFavorite(movieId: Int): Boolean {
+    suspend fun addFavorite(movieId: Int) {
         try {
             movieDao.addFavoriteMovie(movieId)
             Log.d("DB_FAV_ADD", "Successful addition of favorite movie")
         } catch (error: Exception){
             Log.d("DB_FAV_ADD_ERR", "Error while trying to add a favorite movie: $error")
         }
-        return true
     }
 
-    suspend fun removeFavorite(ids: Int): Boolean {
-        return (movieDao.removeFavMovie(ids)>0)
+    suspend fun removeFavorite(ids: Int) {
+        try {
+            movieDao.removeFavMovie(ids)
+            Log.d("DB_FAV_REMOVE", "Successful removal of favorite movie")
+        } catch (error: Exception){
+            Log.d("DB_FAV_REMOVE_ERR", "Error while trying to remove a favorite movie: $error")
+        }
     }
 
     suspend fun isFavoriteMovie(movieId: Int): Int{

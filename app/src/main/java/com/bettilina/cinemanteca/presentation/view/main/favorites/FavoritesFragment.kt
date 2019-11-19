@@ -1,9 +1,7 @@
 package com.bettilina.cinemanteca.presentation.view.main.favorites
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +10,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bettilina.cinemanteca.App
 import com.bettilina.cinemanteca.R
@@ -27,7 +24,6 @@ import com.bettilina.cinemanteca.utils.Constants
 import com.bettilina.cinemanteca.utils.OrderCriterial
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_favorites.*
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.view_movie.view.*
 import org.koin.android.ext.android.inject
 
@@ -70,11 +66,14 @@ class FavoritesFragment: Fragment() {
 
     private fun favMoviesLoaded(movies: List<Movie>){
         if(movies.size>0){
-            text_nonFavs.gone()
+            layout_nonFavs.gone()
+            no_Favs.gone()
             relativeL_Favs.visible()
             adapter.movies = movies
         }else{
-            text_nonFavs.visible()
+            layout_nonFavs.visible()
+            no_Favs.visible()
+            no_Favs.playAnimation()
             relativeL_Favs.gone()
         }
 

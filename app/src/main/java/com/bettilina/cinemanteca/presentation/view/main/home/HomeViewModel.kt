@@ -10,6 +10,7 @@ import com.bettilina.cinemanteca.data.repository.movies.DatabaseMovieDataStore
 import com.bettilina.cinemanteca.utils.OrderCriterial
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import okhttp3.internal.wait
 import java.lang.Exception
@@ -99,6 +100,8 @@ class HomeViewModel(private val repository: MovieSourceRepository,
     private fun loadMoviesStandard(){
         localIsLoading.postValue(true)
         launch(Dispatchers.IO){
+            //Delay so the user can see the loading icon - LOL!
+            kotlinx.coroutines.delay(3000)
             try {
                 val movies = repository.getMovies()
                 movies.forEach{ movie ->
@@ -117,6 +120,8 @@ class HomeViewModel(private val repository: MovieSourceRepository,
     private fun searchMoviesStandard(query: String){
         localIsLoading.postValue(true)
         launch(Dispatchers.IO){
+            //Delay so the user can see the loading icon - LOL!
+            kotlinx.coroutines.delay(3000)
             try {
                 val movies = repository.getMoviesBySearch(query)
                 movies.forEach{ movie ->
@@ -135,6 +140,8 @@ class HomeViewModel(private val repository: MovieSourceRepository,
     private fun loadMoviesWithFilter(ratingFilter: Float){
         localIsLoading.postValue(true)
         launch(Dispatchers.IO){
+            //Delay so the user can see the loading icon - LOL!
+            kotlinx.coroutines.delay(3000)
             try {
                 val init:Int = (ratingFilter.toInt() *2 ) -2
                 val end:Int = (ratingFilter.toInt() *2 )
@@ -156,6 +163,8 @@ class HomeViewModel(private val repository: MovieSourceRepository,
     private fun searchMovieWithFilter(ratingFilter: Float, txtSearch: String) {
         localIsLoading.postValue(true)
         launch(Dispatchers.IO) {
+            //Delay so the user can see the loading icon - LOL!
+            kotlinx.coroutines.delay(3000)
             try {
                 val moviesList = repository.getMoviesBySearch(txtSearch)
                 //TODO: Call endpoint instead of filtering the list

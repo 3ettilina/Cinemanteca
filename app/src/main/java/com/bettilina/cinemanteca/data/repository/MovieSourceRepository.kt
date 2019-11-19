@@ -7,8 +7,6 @@ interface MovieSourceRepository {
 
     suspend fun getMovies(): List<Movie>
 
-    suspend fun getMoviesByPage(page: Int): List<Movie>
-
     suspend fun getMoviesByVoteAvg(minVote: Int, maxVote: Int): List<Movie>
 
     suspend fun getMoviesBySearch(txtSearch: String): List<Movie>

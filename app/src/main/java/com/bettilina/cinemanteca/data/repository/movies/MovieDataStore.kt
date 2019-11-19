@@ -7,8 +7,6 @@ interface MovieDataStore {
 
     suspend fun getMovies(): List<Movie>
 
-    suspend fun getMoviesByPage(pageNumber: Int = 1): List<Movie>
-
     suspend fun getMoviesByVoteAvg(minVote: Int, maxVote: Int): List<Movie>
 
     suspend fun getMoviesBySearch(txtSearch: String): List<Movie>

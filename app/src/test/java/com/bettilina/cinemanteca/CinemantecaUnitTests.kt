@@ -1,150 +1,235 @@
 package com.bettilina.cinemanteca
 
 import android.content.Context
-import com.bettilina.cinemanteca.mocks.MovieDataStoreFactoryMock
-import com.bettilina.cinemanteca.mocks.MovieServiceMock
-import com.bettilina.cinemanteca.mocks.NetworkingManagerMock
+import com.bettilina.cinemanteca.data.model.Movie
+import com.bettilina.cinemanteca.data.model.Review
+import com.bettilina.cinemanteca.data.repository.movies.CloudMovieDataStore
+import com.bettilina.cinemanteca.data.repository.movies.DatabaseMovieDataStore
+import com.bettilina.cinemanteca.mocks.*
+import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.runner.RunWith
-//import org.mockito.Mock
-//import org.mockito.runners.MockitoJUnitRunner
+import org.mockito.Mock
+import org.mockito.runners.MockitoJUnitRunner
 
-//@RunWith(MockitoJUnitRunner::class)
-class ExampleUnitTest {
+@RunWith(MockitoJUnitRunner::class)
+class CinemantecaUnitTests {
 
     //arrange
-    // Declare mock objects needed
-    //@Mock
+    @Mock
     private lateinit var contextMock: Context
 
     lateinit var networkingManagerMock: NetworkingManagerMock
     lateinit var movieDataStoreFactoryMock: MovieDataStoreFactoryMock
     lateinit var movieServiceMock: MovieServiceMock
+    lateinit var movieDaoMock: MovieDaoMock
+    lateinit var databaseMovieDataStoreMock: DatabaseMovieDataStoreMock
+    lateinit var cloudMovieDataStoreMock: CloudMovieDataStoreMock
 
 
     @Before
-    fun initTests(){
+    fun initTests() {
         //arrange
-        //Initialize mock objects
         networkingManagerMock = NetworkingManagerMock(contextMock)
         movieServiceMock = MovieServiceMock()
-        //movieDataStoreFactoryMock = MovieDataStoreFactoryMock()
+        movieDaoMock = MovieDaoMock()
+        movieDataStoreFactoryMock =
+            MovieDataStoreFactoryMock(movieServiceMock, movieDaoMock, networkingManagerMock)
+        databaseMovieDataStoreMock = DatabaseMovieDataStoreMock(movieDaoMock)
+        cloudMovieDataStoreMock = CloudMovieDataStoreMock(movieServiceMock)
     }
 
     @Test
-    fun testCloudSourceDataStoreRetrieval(){
+    fun testCloudSourceDataStoreRetrieval() {
         //arrange
-        // set networkManager connectivity to true
         networkingManagerMock.isNetworkingAvailable = true
 
         //act
-        // Call MovieDataStoreFactory mock method to get DataStore
-
+        val actual = movieDataStoreFactoryMock.movieDataStoreFactory
 
         //assert
-        // Save actual value when retrieving the DataStore
-        // Save expected value for that retrieval (CloudMovieDataStore)
-        // Assert equals
+        assert(actual is CloudMovieDataStore)
     }
 
     @Test
-    fun testDatabaseSourceDataStoreRetrieval(){
+    fun testDatabaseSourceDataStoreRetrieval() {
         //arrange
-        // set networkManager connectivity to false
+        networkingManagerMock.isNetworkingAvailable = false
 
         //act
-        // Call MovieDataStoreFactory mock method to get DataStore
+        val actual = movieDataStoreFactoryMock.movieDataStoreFactory
 
         //assert
-        // Save actual value when retrieving the DataStore
-        // Save expected value for that retrieval (DatabaseMovieDataStore)
-        // Assert equals
+        assert(actual is DatabaseMovieDataStore)
     }
 
     @Test
-    fun testSaveMoviesOnDB_isSuccess(){
+    fun testSaveMoviesOnDB_isSuccess() {
         //arrange
-        // create a private method to return a list with movie mock objects
+        val movies = getListOfMovies()
+        movieDaoMock.moviesList = movies
 
         //act
-        // Call DatabaseMovieDataStore mock to add movies
+        val actualResult = runBlocking {
+            databaseMovieDataStoreMock.saveMovieMock(movies)
+
+            val actual = databaseMovieDataStoreMock.getMoviesMock()
+
+            return@runBlocking actual
+        }
 
         //assert
-        // Retrieve movies from DB and check whether the size of the list,
-        // equals the size of the list added.
+        assertEquals(movies.size, actualResult.size)
     }
 
     @Test
-    fun testSaveFavoriteMovieOnDB_isSuccess(){
+    fun testSaveFavoriteMovieOnDB_isSuccess() {
         //arrange
-        // use last method that returns a list of movies and save it on the DB
-        // create a variable with the id of the movie to add to favorite
+        val movies = getListOfFavMovies()
+        movieDaoMock.favMovieList = movies
 
         //act
-        // Call DatabaseMovieDataStore mock method to add movie to favs
+        val actualResult = runBlocking {
+
+            databaseMovieDataStoreMock.saveMovieMock(movies)
+
+            databaseMovieDataStoreMock.addFavoriteMock(222)
+
+            val actual = databaseMovieDataStoreMock.getFavoriteMoviesMock()
+
+            return@runBlocking actual
+        }
 
         //assert
-        // Save actual value when retrieving Fav movies
-        // Save expected value for that retrieval
-        // Assert
+        assertEquals(1, actualResult.size)
+        assertEquals(222, actualResult[0].id)
     }
 
     @Test
-    fun testSaveFavoriteMovieOnDB_fails(){
+    fun testRemoveFavoriteMovieOnDB_isSuccess() {
         //arrange
-        // use last method that returns a list of movies and save it on the DB
-        // create a variable with the id of the movie to add to favorite, but use one
-        // that doesn't exist on the db
+        movieDaoMock.favMovieList = listOf()
 
         //act
-        // Call DatabaseMovieDataStore mock method to add movie to favs
+        val actualResult = runBlocking {
+            databaseMovieDataStoreMock.removeFavoriteMock(111)
+
+            val actual = databaseMovieDataStoreMock.getFavoriteMoviesMock()
+
+            return@runBlocking actual
+        }
 
         //assert
-        // Save actual value when retrieving Fav movies
-        // Save expected value for that retrieval
-        // Assert
+        assertEquals(0, actualResult.size)
     }
 
     @Test
-    fun testRemovalOfFavoriteMovieOnDB_isSuccess(){
+    fun testRetrievalOfMoviesFromService_isSuccess() {
         //arrange
-        // use last method that returns a list of movies and save it on the DB
-        // create a variable with the id of the movie to remove
+        movieServiceMock.movies = getListOfMovies()
 
         //act
-        // Call DatabaseMovieDataStore mock method to remove movie from DB
+        val actualResult = runBlocking {
+            val actual = cloudMovieDataStoreMock.getMoviesMock()
+
+            return@runBlocking actual
+        }
 
         //assert
-        // Save actual value when retrieving Fav movies
-        // Save expected value for that retrieval
-        // Assert
+        assert(actualResult.isNotEmpty())
     }
 
     @Test
-    fun testRemovalOfFavoriteMovieOnDB_fails(){
+    fun testRetrievalOfMovieReviewFromService_isSuccess() {
         //arrange
-        // use last method that returns a list of movies and save it on the DB
-        // create a variable with the id of the movie to remove
+        movieServiceMock.reviews = getListOfReviews()
 
         //act
-        // Call DatabaseMovieDataStore mock method to remove movie from DB
+        val actualResult = runBlocking {
+            val actual = cloudMovieDataStoreMock.getMovieReviewsMock(111)
+
+            return@runBlocking actual
+        }
 
         //assert
-        // Save actual value when retrieving Fav movies
-        // Save expected value for that retrieval
-        // Assert
+        assert(actualResult.isNotEmpty())
     }
 
-    @Test
-    fun testRetrievalOfMoviesFromService_isSuccess(){
-        //act
-        // Call CloudMoviesDataStore mock method to retrieve list of movies
-
-        //assert
-        // assert the list is not empty
+    private fun getListOfMovies(): List<Movie> {
+        return listOf(
+            Movie(
+                111,
+                "Title 1",
+                "This is the description of movie Title 1",
+                7.6.toFloat(),
+                "2019-05-10",
+                "some/path",
+                345.66,
+                344,
+                "some/other/path",
+                "English",
+                0
+            ),
+            Movie(
+                222,
+                "Title 2",
+                "This is the description of movie Title 2",
+                5.6.toFloat(),
+                "2015-05-09",
+                "some/path",
+                355.66,
+                378,
+                "some/other/path",
+                "Spanish",
+                0
+            ),
+            Movie(
+                333,
+                "Title 3",
+                "This is the description of movie Title 3",
+                4.5.toFloat(),
+                "2015-08-12",
+                "some/path",
+                245.56,
+                278,
+                "some/other/path",
+                "Spanish",
+                0
+            )
+        )
     }
 
+
+    private fun getListOfFavMovies(): List<Movie> {
+        return listOf(
+            Movie(
+                222,
+                "Title 2",
+                "This is the description of movie Title 2",
+                5.6.toFloat(),
+                "2015-05-09",
+                "some/path",
+                355.66,
+                378,
+                "some/other/path",
+                "Spanish",
+                1
+            )
+        )
+    }
+
+    private fun getListOfReviews(): List<Review> {
+        return listOf(
+            Review(
+                "PEPE",
+                "Awesome movie"),
+            Review(
+                "MARTA",
+                "I went with my daughter and we had so much fun!"
+            )
+        )
+    }
 }

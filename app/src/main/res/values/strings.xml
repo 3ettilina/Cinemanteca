@@ -11,4 +11,5 @@
     <string name="with_internet_splash_screen">Retrieving data from service...</string>
     <string name="without_internet_splash_screen">You\'re not connected, folk! \n Retrieving data from database...</string>
     <string name="string_non_connection">You\'re not connected, folk! \nDon\'t worry, you can still see some of the \nmovies and your favorite ones.</string>
+    <string name="no_favs_movies_yet">You don\'t have any favorite movie yet.</string>
 </resources>

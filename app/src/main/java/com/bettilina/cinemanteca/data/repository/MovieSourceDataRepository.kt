@@ -10,10 +10,6 @@ class MovieSourceDataRepository(var factory: MovieDataStoreFactory): MovieSource
         return factory.movieDataStoreFactory.getMovies()
     }
 
-    override suspend fun getMoviesByPage(page: Int): List<Movie> {
-        return factory.movieDataStoreFactory.getMoviesByPage(page)
-    }
-
     override suspend fun getMoviesByVoteAvg(minVote: Int, maxVote: Int): List<Movie> {
         return factory.movieDataStoreFactory.getMoviesByVoteAvg(minVote, maxVote)
     }

@@ -22,7 +22,7 @@ interface MovieDao {
     suspend fun addFavoriteMovie(movieId: Int)
 
     @Query("UPDATE Movies SET isFavorite = 0 where id = :movieId")
-    suspend fun removeFavMovie(movieId: Int): Int
+    suspend fun removeFavMovie(movieId: Int)
 
     @Update
     suspend fun updateFavMovies(movies: List<Movie>)
@@ -31,5 +31,5 @@ interface MovieDao {
     suspend fun isFavMovie(movieId: Int) : Int
 
     @Query("SELECT count(*)>0 from Movies where id = :movieId ")
-    suspend fun existMovie(movieId: Int) : Boolean
+    suspend fun doesMovieExist(movieId: Int) : Boolean
 }
